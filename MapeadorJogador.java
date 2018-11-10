@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvccomswing;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

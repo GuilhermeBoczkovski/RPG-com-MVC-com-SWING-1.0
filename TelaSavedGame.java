@@ -7,15 +7,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
-public class TelaMenuInicial extends JFrame{
+public class TelaSavedGame extends JFrame{
     
     private final ControladorGeral controladorGeral;
     
-    private JButton btNewGame;
+    private JLabel lb;
+    private JButton btDelete;
     private JButton btContinue;
     
-    public TelaMenuInicial(ControladorGeral controladorGeral){
+    public TelaSavedGame(ControladorGeral controladorGeral){
         super("Role Playing Game");
         
         this.controladorGeral = controladorGeral;
@@ -27,32 +29,41 @@ public class TelaMenuInicial extends JFrame{
         container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         
-        btNewGame = new JButton();
-        btNewGame.setText("NEW GAME");
+        lb = new JLabel();
+        lb.setText("Selecione o herói que deseja excluir ou jogar");
         c.fill = GridBagConstraints.HORIZONTAL;
         //c.weightx = 0.5;
         c.gridx = 0;
         c.gridy = 0;
-        container.add(btNewGame, c);
+        container.add(lb, c);
+        
+        //JTable de 3 colunas (nome/nivel/)
         
         btContinue = new JButton();
-        btContinue.setText("CONTINUE");
+        btContinue.setText("ESTOU PREPARADO");
         c.fill = GridBagConstraints.HORIZONTAL;
         //c.weightx = 0.5;
-        c.gridx = 1;
-        c.gridy = 0;
+        c.gridx = 0;
+        c.gridy = 3;
         container.add(btContinue, c);
         
-        TelaMenuInicial.GerenciadorDeBotoes btManager = new TelaMenuInicial.GerenciadorDeBotoes();
-        btNewGame.addActionListener(btManager);
-        btContinue.addActionListener(btManager);
+        btDelete = new JButton();
+        btDelete.setText("ESTOU PREPARADO");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        //c.weightx = 0.5;
+        c.gridx = 3;
+        c.gridy = 3;
+        container.add(btDelete, c);
+        
+        GerenciadorDeBotoes btManager = new GerenciadorDeBotoes();
+        bt.addActionListener(btManager);
     }
     
-    public void mostraTelaMenuInicial(){
+    public void mostraTelaInicio(){
         setVisible(true);
     }
     
-    public void ocultaTelaMenuInicial(){
+    public void ocultaTelaInicio(){
         setVisible(false);
     }
     
@@ -60,19 +71,10 @@ public class TelaMenuInicial extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == btNewGame){
-                ocultaTelaMenuInicial();
-                //
-            }else if(e.getSource() == btContinue){
-                ocultaTelaMenuInicial();
-                
-            }
+            ocultaTelaInicio();
+            controladorGeral.play(tf.getText());
         }
         
     }
-    
-    //new game ou continue
-    //new game -> 
-    //continue ->
-    
+        
 }
