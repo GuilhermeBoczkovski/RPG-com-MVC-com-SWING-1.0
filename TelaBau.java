@@ -1,6 +1,8 @@
 package rpgcommvccomswing;
 import java.util.Scanner;
 import java.util.ArrayList;
+import rpgcommvccomswing.ConteudoTelaBau;
+import rpgcommvccomswing.ControladorBau;
 
 public class TelaBau extends TelaEncontro{
     private ControladorBau ctrlBau;

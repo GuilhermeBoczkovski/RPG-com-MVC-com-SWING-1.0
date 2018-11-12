@@ -1,5 +1,6 @@
 package rpgcommvccomswing;
 import java.util.Random;
+import rpgcommvccomswing.ControladorBau;
 
 public class ControladorPrincipal {
     

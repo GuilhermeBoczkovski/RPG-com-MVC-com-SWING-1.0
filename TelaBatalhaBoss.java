@@ -2,6 +2,7 @@ package rpgcommvccomswing;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import rpgcommvccomswing.ConteudoTelaBatalha;
 
 public class TelaBatalhaBoss {
 

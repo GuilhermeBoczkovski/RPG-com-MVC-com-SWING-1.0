@@ -70,7 +70,7 @@ public class TelaInicio extends JFrame{
     }
     
     public void mostraTelaInicio(){
-        setVisible(true);
+        this.setVisible(true);
     }
     
     public void ocultaTelaInicio(){

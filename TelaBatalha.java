@@ -2,6 +2,7 @@ package rpgcommvccomswing;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import rpgcommvccomswing.ConteudoTelaBatalha;
 
 public class TelaBatalha extends TelaEncontro{
     
@@ -190,4 +191,6 @@ public class TelaBatalha extends TelaEncontro{
         System.out.println("O heroi subiu do nivel " + nivelInicial + " para o nivel " +  nivelFinal);
         System.out.println("");
     }
+    
+    
 }

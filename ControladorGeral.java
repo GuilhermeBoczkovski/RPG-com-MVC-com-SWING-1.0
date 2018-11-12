@@ -9,22 +9,28 @@ public class ControladorGeral {
     private ControladorPrincipal controladorPrincipal;
     
     public ControladorGeral(){
-        this.telaInicio = new TelaInicio(this);
+        this.telaMenuInicial = new TelaMenuInicial(this);
+        this.menuInicial();
     }
     
     public void continuar(){
         
     }
     
+    public void menuInicial(){
+        this.telaMenuInicial.mostraTelaMenuInicial();
+    }
+    
     public void inicio(){
         try{
+            this.telaInicio = new TelaInicio(this);
             telaInicio.mostraTelaInicio();
         }catch(Exception e){
             System.out.println(e);
         }
     }
     
-    void play(String nome){
+    public void play(String nome){
         this.controladorPrincipal = new ControladorPrincipal(nome, 1);
         this.controladorPrincipal.escolheEncontro();
     }

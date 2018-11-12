@@ -62,7 +62,7 @@ public class TelaMenuInicial extends JFrame{
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == btNewGame){
                 ocultaTelaMenuInicial();
-                //
+                controladorGeral.inicio();
             }else if(e.getSource() == btContinue){
                 ocultaTelaMenuInicial();
                 

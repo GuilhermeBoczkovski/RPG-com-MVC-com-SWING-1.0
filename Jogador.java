@@ -1,6 +1,15 @@
 package rpgcommvccomswing;
 
 import java.util.ArrayList;
+import rpgcommvccomswing.Arma;
+import rpgcommvccomswing.Bolsa;
+import rpgcommvccomswing.Consumivel;
+import rpgcommvccomswing.Diario;
+import rpgcommvccomswing.Feitico;
+import rpgcommvccomswing.FeiticoNaoListadoException;
+import rpgcommvccomswing.IJogador;
+import rpgcommvccomswing.Ser;
+import rpgcommvccomswing.TipoElemento;
 
 public class Jogador extends Ser implements IJogador {
     

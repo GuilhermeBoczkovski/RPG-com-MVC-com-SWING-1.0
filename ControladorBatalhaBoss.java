@@ -1,6 +1,13 @@
 package rpgcommvccomswing;
 
 import java.util.ArrayList;
+import rpgcommvccomswing.Arma;
+import rpgcommvccomswing.Consumivel;
+import rpgcommvccomswing.ConteudoTelaBatalha;
+import rpgcommvccomswing.Feitico;
+import rpgcommvccomswing.Monstro;
+import rpgcommvccomswing.Ser;
+import rpgcommvccomswing.TipoElemento;
 
 class ControladorBatalhaBoss {
 
@@ -88,12 +95,12 @@ class ControladorBatalhaBoss {
                     tipoElemento = TipoElemento.PEDRA;
                     break;
                 default :
-                    throw new NumeroInvalidoException();
+                    tipoElemento = TipoElemento.PEDRA;
             }
             ArrayList<Feitico> feiticos = this.controladorPrincipal.getJogador().verFeiticos(tipoElemento);
             ArrayList<ConteudoTelaBatalha> conteudoTelaS = this.compactar(feiticos);
             telaBatalha.mostraFeiticos(conteudoTelaS);
-        }catch(NumeroInvalidoException e){
+        }catch(Exception e){
             this.telaBatalha.mostraExcecao(e.getMessage());
             telaBatalha.mostraMenuBatalha();
         }
@@ -121,9 +128,8 @@ class ControladorBatalhaBoss {
                     this.verMeusAtributos();
                     break;
                 default:
-                    throw new NumeroInvalidoException();
             }
-        }catch(NumeroInvalidoException e){
+        }catch(Exception e){
             this.telaBatalha.mostraExcecao(e.getMessage());
             this.telaBatalha.mostraMenuBatalha();
         }
@@ -164,9 +170,8 @@ class ControladorBatalhaBoss {
                 this.controladorPrincipal.getJogador().usarItem(indice);
                 this.telaBatalha.mostraMenuBatalha();
             }else{
-                throw new NumeroInvalidoException();
             }
-        }catch(NumeroInvalidoException e){
+        }catch(Exception e){
             this.telaBatalha.mostraExcecao(e.getMessage());
             this.telaBatalha.mostraMenuBatalha();
         }

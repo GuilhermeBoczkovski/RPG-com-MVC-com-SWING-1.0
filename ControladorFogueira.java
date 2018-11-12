@@ -1,5 +1,10 @@
 package rpgcommvccomswing;
 import java.util.ArrayList;
+import rpgcommvccomswing.Consumivel;
+import rpgcommvccomswing.ConteudoTelaFogueira;
+import rpgcommvccomswing.Feitico;
+import rpgcommvccomswing.TipoElemento;
+import rpgcommvccomswing.TipoEvento;
 
 public class ControladorFogueira {
     private TelaFogueira telaFogueira;
@@ -35,9 +40,9 @@ public class ControladorFogueira {
                 case "6": telaFogueira.mostraMenuEsquecerFeiticos(compactarFeitico());
                         break;
                 case "7": if(ctrlEncontro.getJogador().getPossuiChave()){irParaBoss();}
-                        else{throw new NumeroInvalidoException();}
+                        else{}
                         break;
-                default: throw new NumeroInvalidoException();
+                default:
             }
         } catch(Exception e){
             telaFogueira.mostraException(e.getMessage());
@@ -100,7 +105,7 @@ public class ControladorFogueira {
                 case "4": telaFogueira.mostraFeiticos(compactarFeiticoPorTipo(TipoElemento.PEDRA));
                         telaFogueira.mostraMenuFogueira();
                         break;
-                default: throw new NumeroInvalidoException();
+                default: 
             }
         } catch(Exception e){
             telaFogueira.mostraException(e.getMessage());

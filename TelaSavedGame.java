@@ -56,7 +56,8 @@ public class TelaSavedGame extends JFrame{
         container.add(btDelete, c);
         
         GerenciadorDeBotoes btManager = new GerenciadorDeBotoes();
-        bt.addActionListener(btManager);
+        btContinue.addActionListener(btManager);
+        btDelete.addActionListener(btManager);
     }
     
     public void mostraTelaInicio(){
@@ -72,7 +73,7 @@ public class TelaSavedGame extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             ocultaTelaInicio();
-            controladorGeral.play(tf.getText());
+            //controladorGeral.play(tf.getText());
         }
         
     }

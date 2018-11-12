@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvccomswing;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -22,8 +22,8 @@ class ControladorBau{
 
     public void iniciaEncontro() {      
         geraItens();
-        telaBauS = new TelaBauSwing(this);
-        telaBauS.mostraTelaBau();
+        telaBau = new TelaBau(this);
+        telaBau.mostraMenu();
         /*
         telaBau.mostraAcharBau();
         telaBau.mostraMenu();*/
@@ -79,18 +79,18 @@ class ControladorBau{
                 case "3": if(temArma){
                             compararArmas();
                           }else{
-                            throw new NumeroInvalidoException();
+                            
                           };
                           break;
                 case "4": if(temConsumivel){
                             verItens();
                           }else{
-                            throw new NumeroInvalidoException();
+                            
                           };
                           break;
-                default: throw new NumeroInvalidoException();
+                default: 
             }
-        }catch(NumeroInvalidoException e){
+        }catch(Exception e){
             telaBau.mostraException(e.getMessage());
             telaBau.mostraMenu();
         }

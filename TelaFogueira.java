@@ -1,6 +1,7 @@
 package rpgcommvccomswing;
 import java.util.ArrayList;
 import java.util.Scanner;
+import rpgcommvccomswing.ConteudoTelaFogueira;
 
 public class TelaFogueira extends TelaEncontro{
     private ControladorFogueira ctrlFogueira;
