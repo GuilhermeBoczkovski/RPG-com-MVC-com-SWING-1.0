@@ -1,10 +1,11 @@
-package rpgcommvccomswing;
+package rpgcommvc;
 import java.util.ArrayList;
 import java.util.Random;
 
 class ControladorBau{
     private ControladorPrincipal ctrlPrincipal;
     private TelaBau telaBau;
+    private TelaBauSwing telaBauS;
     private Arma armaBau;
     private Consumivel consumivelBau;
     private boolean temGrimorio;
@@ -19,10 +20,13 @@ class ControladorBau{
         ctrlPrincipal = aThis;
     }
 
-    public void iniciaEncontro() {
+    public void iniciaEncontro() {      
         geraItens();
+        telaBauS = new TelaBauSwing(this);
+        telaBauS.mostraTelaBau();
+        /*
         telaBau.mostraAcharBau();
-        telaBau.mostraMenu();
+        telaBau.mostraMenu();*/
     }
     
     public void geraItens(){
