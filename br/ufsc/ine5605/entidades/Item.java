@@ -1,6 +1,8 @@
 package br.ufsc.ine5605.entidades;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable{
     private String nome;
     
     public Item(String nome){

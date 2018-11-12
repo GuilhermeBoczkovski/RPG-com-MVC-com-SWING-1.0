@@ -11,10 +11,18 @@ public class ControladorGeral {
     private TelaMenuInicial telaMenuInicial;
     private TelaSavedGame telaSavedGame;
     private ControladorPrincipal controladorPrincipal;
+    private static ControladorGeral instancia;
     
-    public ControladorGeral(){
+    private ControladorGeral(){
         this.telaMenuInicial = new TelaMenuInicial(this);
         this.menuInicial();
+    }
+    
+    public static ControladorGeral getInstance(){
+        if(instancia == null){
+            instancia = new ControladorGeral();
+        }
+        return instancia;
     }
     
     public void continuar(){
@@ -27,7 +35,7 @@ public class ControladorGeral {
     
     public void inicio(){
         try{
-            this.telaInicio = new TelaInicio(this);
+            this.telaInicio = new TelaInicio();
             telaInicio.mostraTelaInicio();
         }catch(Exception e){
             System.out.println(e);
@@ -35,8 +43,8 @@ public class ControladorGeral {
     }
     
     public void play(String nome){
-        this.controladorPrincipal = new ControladorPrincipal(nome, 1);
-        this.controladorPrincipal.escolheEncontro();
+        ControladorPrincipal.setInstance(nome, 1);
+        ControladorPrincipal.getInstance().escolheEncontro();
     }
     
 }

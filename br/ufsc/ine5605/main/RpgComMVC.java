@@ -2,6 +2,7 @@ package br.ufsc.ine5605.main;
 
 
 
+import br.ufsc.ine5605.controladores.ControladorGeral;
 import br.ufsc.ine5605.entidades.Feitico;
 import br.ufsc.ine5605.telas.TelaTabelaFeiticos;
 import br.ufsc.ine5605.entidades.TipoElemento;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public class RpgComMVC {
 
     public static void main(String[] args) {
-        
+        /*
         ConteudoTelaBatalha contTela1 = new ConteudoTelaBatalha();
         ConteudoTelaBatalha contTela2 = new ConteudoTelaBatalha();
         ConteudoTelaBatalha contTela3 = new ConteudoTelaBatalha();
@@ -27,8 +28,8 @@ public class RpgComMVC {
         arr.add(contTela4);
         TelaTabelaFeiticos tela = new TelaTabelaFeiticos(arr);
         tela.mostraTela();
-        
-        //ControladorGeral ctrlG = new ControladorGeral();
+        */
+        ControladorGeral.getInstance();
     }
     
 }

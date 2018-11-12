@@ -1,6 +1,8 @@
 package br.ufsc.ine5605.entidades;
 
-public class Consumivel extends Item{
+import java.io.Serializable;
+
+public class Consumivel extends Item implements Serializable{
     
     public Consumivel(String nome){
         super(nome);

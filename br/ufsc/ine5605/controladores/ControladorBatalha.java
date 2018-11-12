@@ -20,8 +20,8 @@ public class ControladorBatalha {
     private int nivelInicial;
 
     public ControladorBatalha(ControladorPrincipal controladorPrincipal){
-        this.telaBatalha = new TelaBatalha(this);
         this.controladorPrincipal = controladorPrincipal;
+        this.telaBatalha = new TelaBatalha(this);
     }
     
     public void atacar(ConteudoTelaBatalha conteudoTela){

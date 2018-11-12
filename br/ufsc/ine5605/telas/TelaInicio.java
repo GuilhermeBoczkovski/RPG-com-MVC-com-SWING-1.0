@@ -13,7 +13,7 @@ import br.ufsc.ine5605.controladores.ControladorGeral;
 
 public class TelaInicio extends JFrame{
     
-    private final ControladorGeral controladorGeral;
+    
     
     private JLabel lb1;
     private JLabel lb2;
@@ -21,10 +21,10 @@ public class TelaInicio extends JFrame{
     private JLabel lb3;
     private JButton bt;
     
-    public TelaInicio(ControladorGeral controladorGeral){
+    public TelaInicio(){
         super("Role Playing Game");
         
-        this.controladorGeral = controladorGeral;
+        
         
         setSize(1024,768);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,7 +83,8 @@ public class TelaInicio extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             ocultaTelaInicio();
-            controladorGeral.play(tf.getText());
+            
+            ControladorGeral.getInstance().play(tf.getText());
         }
         
     }

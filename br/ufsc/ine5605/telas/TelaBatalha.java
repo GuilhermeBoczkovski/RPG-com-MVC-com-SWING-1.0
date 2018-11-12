@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import br.ufsc.ine5605.controladores.ControladorBatalha;
+import br.ufsc.ine5605.entidades.Jogador;
 
 public class TelaBatalha extends TelaEncontro{
     
@@ -403,23 +404,23 @@ public class TelaBatalha extends TelaEncontro{
         c.gridy = 12;
         container.add(bt4, c);
         /*----------BOTOES 2----------*/
-        bt4 = new JButton();
-        bt4.setText("Usar Item");
+        bt5 = new JButton();
+        bt5.setText("Usar Item");
         bt5.setActionCommand("5");
         c.fill = GridBagConstraints.HORIZONTAL;
         //c.weightx = 0.5;
         c.gridx = 1;
         c.gridy = 9;
-        container.add(bt4, c);
+        container.add(bt5, c);
         
-        bt5 = new JButton();
-        bt5.setText("Meus Atributos");
+        bt6 = new JButton();
+        bt6.setText("Meus Atributos");
         bt6.setActionCommand("6");
         c.fill = GridBagConstraints.HORIZONTAL;
         //c.weightx = 0.5;
         c.gridx = 1;
         c.gridy = 10;
-        container.add(bt5, c);
+        container.add(bt6, c);
         
         btVazio = new JButton("-");
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -497,39 +498,54 @@ public class TelaBatalha extends TelaEncontro{
     }
 
     public void mostraMenuAtaque(ArrayList<ConteudoTelaBatalha> compactados) {
-            
-            TelaTabelaFeiticos telaFeiticos = new TelaTabelaFeiticos(compactados);
-            telaFeiticos.mostraTela();
-            telaFeiticos.getIndiceFeitico();
-        /*
-        int indiceFeitico = 0;
+        TelaTabelaFeiticos telaFeiticos = new TelaTabelaFeiticos(compactados);
+        telaFeiticos.mostraTela();
+        int i = telaFeiticos.getIndiceFeitico();
         ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
-        conteudoTela.indiceFeitico = indiceFeitico;
+        conteudoTela.indiceFeitico = i;
         this.controladorBatalha.atacar(conteudoTela);
-        */
+    }
+
+    public void mostraFimBatalha(ConteudoTelaBatalha conteudoTelaAtaqueJogador) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void mostraPassagemNivel(int nivelInicial, int nivelInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void mostraAnalise(ConteudoTelaBatalha conteudoTela) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void mostraItens(ArrayList<ConteudoTelaBatalha> conteudoTelaS, ConteudoTelaBatalha conteudoTela) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void mostraFeiticos(ArrayList<ConteudoTelaBatalha> conteudoTelaS) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void mostraExcecao(String message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void mostraMenuBatalha() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void mostraMenuFeitico() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void mostraMenuItens(ArrayList<ConteudoTelaBatalha> compactar) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void mostraMeusAtributos(Jogador jogador) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    /*
-    System.out.println("Seus feiticos sao:");
-        int i = 0;
-        for(ConteudoTelaBatalha conteudoTela: conteudoTelaS){
-            System.out.println("indice " + i + ": " + conteudoTela.feitico.getNome() + ", tipo:  " + conteudoTela.feitico.getTipoElemento() + ", dano:  +" + conteudoTela.feitico.getDano());
-            i++;
-        }
-        System.out.println("");
-        System.out.println("Qual feitiço gostaria de usar?");
-        System.out.println("(digite o indice do feitiço)");
-        String indiceFeiticoString = teclado.nextLine();
-        if(this.controladorBatalha.indiceFeiticoValido(indiceFeiticoString)){
-            int indiceFeiticoInt = Integer.parseInt(indiceFeiticoString);
-            ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
-            conteudoTela.indiceFeitico = indiceFeiticoInt;
-            this.controladorBatalha.atacar(conteudoTela);
-        }else{
-            System.out.println("Numero invalido, tente novamente...");
-            this.mostraMenuAtaque(conteudoTelaS);
-        }
-    */
     private class GerenciadorDeBotoes implements ActionListener{
         
         @Override

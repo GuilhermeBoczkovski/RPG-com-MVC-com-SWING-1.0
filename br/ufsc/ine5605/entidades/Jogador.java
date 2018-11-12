@@ -10,8 +10,9 @@ import br.ufsc.ine5605.exception.FeiticoNaoListadoException;
 import br.ufsc.ine5605.entidades.IJogador;
 import br.ufsc.ine5605.entidades.Ser;
 import br.ufsc.ine5605.entidades.TipoElemento;
+import java.io.Serializable;
 
-public class Jogador extends Ser implements IJogador {
+public class Jogador extends Ser implements Serializable, IJogador {
     
     private static final long serialVersionUID = 1L;
     

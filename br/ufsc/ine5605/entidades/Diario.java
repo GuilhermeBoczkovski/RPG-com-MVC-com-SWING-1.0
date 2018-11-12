@@ -1,9 +1,10 @@
 package br.ufsc.ine5605.entidades;
 
 import br.ufsc.ine5605.entidades.TipoEvento;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Diario {
+public class Diario implements Serializable{
     
     private ArrayList<TipoEvento> eventos;
     

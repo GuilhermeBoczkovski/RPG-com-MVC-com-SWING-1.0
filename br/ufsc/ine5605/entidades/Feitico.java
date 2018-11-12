@@ -1,8 +1,9 @@
 package br.ufsc.ine5605.entidades;
 
 import br.ufsc.ine5605.entidades.TipoElemento;
+import java.io.Serializable;
 
-public class Feitico {
+public class Feitico implements Serializable{
 
     private final String nome;
 

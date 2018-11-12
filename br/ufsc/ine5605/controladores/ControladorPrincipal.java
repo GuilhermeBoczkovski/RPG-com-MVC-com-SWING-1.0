@@ -15,8 +15,16 @@ public class ControladorPrincipal {
     private TelaFim telaFim;
     private int teste;
     private MapeadorJogador mapJog;
+    private static ControladorPrincipal instancia;
     
-    public ControladorPrincipal(String nome, int i){
+    public static void setInstance(String nome, int i) {
+        instancia = new ControladorPrincipal(nome, i);
+    }
+    public static ControladorPrincipal getInstance(){
+        return instancia;
+    }
+    
+    private ControladorPrincipal(String nome, int i){
         criaJogador(nome, 10);
         mapJog = new MapeadorJogador();
         mapJog.put(this.jogador);

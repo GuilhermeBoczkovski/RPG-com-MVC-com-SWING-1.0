@@ -1,9 +1,10 @@
 package br.ufsc.ine5605.entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bolsa {
+public class Bolsa implements Serializable{
     private ArrayList<Consumivel> consumiveis;
     
     public Bolsa(){
