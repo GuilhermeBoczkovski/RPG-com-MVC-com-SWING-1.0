@@ -22,11 +22,9 @@ public class TelaInicio extends JFrame{
     private JButton bt;
     
     public TelaInicio(){
-        super("Role Playing Game");
+        super("NEW GAME");
         
-        
-        
-        setSize(1024,768);
+        setSize(1024,384);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         Container container = getContentPane();

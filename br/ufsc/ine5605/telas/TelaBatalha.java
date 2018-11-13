@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import br.ufsc.ine5605.controladores.ControladorBatalha;
+import br.ufsc.ine5605.controladores.ControladorPrincipal;
 import br.ufsc.ine5605.entidades.Jogador;
 
 public class TelaBatalha extends TelaEncontro{
@@ -203,7 +204,6 @@ public class TelaBatalha extends TelaEncontro{
 
 */
     
-    private ControladorBatalha controladorBatalha;
     private JLabel lbNome;
     private JLabel lbNivel;
     private JLabel lbSala;
@@ -227,11 +227,10 @@ public class TelaBatalha extends TelaEncontro{
     private JButton btVazio;
     
     
-    public TelaBatalha(ControladorBatalha controladorBatalha){
-        super("");
-        this.controladorBatalha = controladorBatalha;
+    public TelaBatalha(){
+        super("BATALHA");
     
-        setSize(1024,768);
+        setSize(900,700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Container container = getContentPane();
@@ -486,24 +485,40 @@ public class TelaBatalha extends TelaEncontro{
     }
 
     public void atualizaDados(ConteudoTelaBatalha dadosTelaCompactados) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(dadosTelaCompactados.jogador != null){
+            String vidaJogador = ("VIDA: " + 
+                Integer.toString(dadosTelaCompactados.jogador.getVidaAtual())
+                + "/" + Integer.toString(dadosTelaCompactados.jogador.getVidaTotal()));
+            lbVida.setText(vidaJogador);
+            lbVidaMonstro.setText("VIDA: " + 
+                    Integer.toString(dadosTelaCompactados.monstro.getVidaAtual()) 
+                    + "/" + Integer.toString(dadosTelaCompactados.monstro.getVidaTotal()));
+            
+            lbNome.setText("NOME: " + dadosTelaCompactados.jogador.getNome());
+            lbNivel.setText("NIVEL: " + Integer.toString(dadosTelaCompactados.jogador.getNivelInt()));
+            lbSala.setText("SALA: " + "BATALHA");
+            lbNomeMonstro.setText("NOME: " + dadosTelaCompactados.monstro.getNome());
+            lbNivelMonstro.setText("NIVEL: " + Integer.toString(dadosTelaCompactados.jogador.getNivelInt()));
+            
+            lbNarra1.setText("");
+            lbNarra2.setText("");
+            lbNarra3.setText("");
+            lbNarra4.setText("");
+        }
     }
 
     public void mostraAtaque(ConteudoTelaBatalha conteudoTelaAtaqueJogador, ConteudoTelaBatalha conteudoTelaAtaqueMonstro) {
         lbNarra1.setText(conteudoTelaAtaqueJogador.atacante.getNome() + " ataca " + conteudoTelaAtaqueJogador.atacado.getNome() + " com " + conteudoTelaAtaqueJogador.feitico.getNome() + "causando " + conteudoTelaAtaqueJogador.danoAtaque + "de dano");
         lbNarra2.setText(conteudoTelaAtaqueMonstro.atacante.getNome() + " ataca " + conteudoTelaAtaqueMonstro.atacado.getNome() + "causando " + conteudoTelaAtaqueMonstro.danoAtaque + "de dano");
+        ControladorBatalha.getInstance().atualizaDadosTela();
         if(conteudoTelaAtaqueMonstro.atacado.getVidaAtual()<=0){
-            this.controladorBatalha.gameOver();
+            ControladorBatalha.getInstance().gameOver();
         }
     }
 
     public void mostraMenuAtaque(ArrayList<ConteudoTelaBatalha> compactados) {
         TelaTabelaFeiticos telaFeiticos = new TelaTabelaFeiticos(compactados);
         telaFeiticos.mostraTela();
-        int i = telaFeiticos.getIndiceFeitico();
-        ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
-        conteudoTela.indiceFeitico = i;
-        this.controladorBatalha.atacar(conteudoTela);
     }
 
     public void mostraFimBatalha(ConteudoTelaBatalha conteudoTelaAtaqueJogador) {
@@ -515,7 +530,8 @@ public class TelaBatalha extends TelaEncontro{
     }
 
     public void mostraAnalise(ConteudoTelaBatalha conteudoTela) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TelaAnaliseMonstro telaAnalise = new TelaAnaliseMonstro(conteudoTela);
+        telaAnalise.mostraTela();
     }
 
     public void mostraItens(ArrayList<ConteudoTelaBatalha> conteudoTelaS, ConteudoTelaBatalha conteudoTela) {
@@ -535,7 +551,8 @@ public class TelaBatalha extends TelaEncontro{
     }
 
     public void mostraMenuFeitico() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TelaMenuFeitico telaMenuFeitico = new TelaMenuFeitico();
+        telaMenuFeitico.mostraTela();
     }
 
     public void mostraMenuItens(ArrayList<ConteudoTelaBatalha> compactar) {
@@ -550,7 +567,7 @@ public class TelaBatalha extends TelaEncontro{
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            controladorBatalha.executaOpcao(e.getActionCommand());
+            ControladorBatalha.getInstance().executaOpcao(e.getActionCommand());
         }
         
     }

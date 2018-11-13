@@ -1,5 +1,6 @@
 package br.ufsc.ine5605.telas;
 
+import br.ufsc.ine5605.controladores.ControladorBatalha;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -22,7 +23,7 @@ public class TelaTabelaFeiticos extends JFrame{
     private int indiceFeitico;
     
     public TelaTabelaFeiticos(ArrayList<ConteudoTelaBatalha> conteudos){
-        super("Role Playing Game");
+        super("ATAQUE");
         feiticos = new ArrayList<>();
         for(ConteudoTelaBatalha cont : conteudos){
             System.out.println(cont.feitico.getNome());
@@ -87,7 +88,7 @@ public class TelaTabelaFeiticos extends JFrame{
     }
     
     public int getIndiceFeitico(){
-        return this.indiceFeitico;
+        return this.indiceFeitico; 
     }
     
     private class GerenciadorDeBotoes implements ActionListener{
@@ -96,6 +97,10 @@ public class TelaTabelaFeiticos extends JFrame{
         public void actionPerformed(ActionEvent e) {
             ocultaTela();
             setIndiceFeitico();
+            int i = getIndiceFeitico();
+            ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
+            conteudoTela.indiceFeitico = i;
+            ControladorBatalha.getInstance().atacar(conteudoTela);
         }
         
     }

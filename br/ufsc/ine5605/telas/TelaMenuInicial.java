@@ -17,11 +17,11 @@ public class TelaMenuInicial extends JFrame{
     private JButton btContinue;
     
     public TelaMenuInicial(ControladorGeral controladorGeral){
-        super("Role Playing Game");
+        super("MENU INICIAL");
         
         this.controladorGeral = controladorGeral;
         
-        setSize(1024,768);
+        setSize(512,384);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         Container container = getContentPane();
