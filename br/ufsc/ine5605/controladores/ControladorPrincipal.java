@@ -8,7 +8,6 @@ import br.ufsc.ine5605.mapeadores.MapeadorJogador;
 public class ControladorPrincipal {
     
     private Jogador jogador;
-    private ControladorBatalha ctrlBatalha;
     private ControladorFogueira ctrlFogueira;
     private ControladorBau ctrlBau;
     private ControladorBatalhaBoss ctrlBatBoss;
@@ -17,9 +16,14 @@ public class ControladorPrincipal {
     private MapeadorJogador mapJog;
     private static ControladorPrincipal instancia;
     
-    public static void setInstance(String nome, int i) {
-        instancia = new ControladorPrincipal(nome, i);
+    public static void getInstance(String nome, boolean novoJogo) {
+        if(instancia == null && novoJogo){
+            instancia = new ControladorPrincipal(nome, 1);
+        }else if(instancia == null){
+            instancia = new ControladorPrincipal(nome);
+        }
     }
+    
     public static ControladorPrincipal getInstance(){
         return instancia;
     }
@@ -27,8 +31,7 @@ public class ControladorPrincipal {
     private ControladorPrincipal(String nome, int i){
         criaJogador(nome, 10);
         mapJog = new MapeadorJogador();
-        mapJog.put(this.jogador);
-        ctrlBatalha = new ControladorBatalha(this); 
+        mapJog.put(this.jogador); 
         ctrlFogueira = new ControladorFogueira(this);
         ctrlBau = new ControladorBau(this);
         ctrlBatBoss = new ControladorBatalhaBoss(this);
@@ -36,7 +39,7 @@ public class ControladorPrincipal {
         this.teste = 0;
     }
 
-    public ControladorPrincipal(String nome){
+    private ControladorPrincipal(String nome){
         mapJog = new MapeadorJogador();
         jogador = mapJog.get(nome);
     }
@@ -58,7 +61,7 @@ public class ControladorPrincipal {
                     break;
             case 2: 
                     this.teste++;
-                    ctrlBatalha.iniciaEncontro();
+                    ControladorBatalha.getInstance().iniciaEncontro();
                     break;
             case 3: 
                     this.teste++;

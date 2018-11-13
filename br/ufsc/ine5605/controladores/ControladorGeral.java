@@ -43,7 +43,7 @@ public class ControladorGeral {
     }
     
     public void play(String nome){
-        ControladorPrincipal.setInstance(nome, 1);
+        ControladorPrincipal.getInstance(nome, true);
         ControladorPrincipal.getInstance().escolheEncontro();
     }
     
