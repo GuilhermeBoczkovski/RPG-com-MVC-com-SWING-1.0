@@ -7,9 +7,10 @@ import java.util.Random;
 import br.ufsc.ine5605.entidades.Arma;
 import br.ufsc.ine5605.entidades.Consumivel;
 import br.ufsc.ine5605.telas.ConteudoTelaBau;
+import br.ufsc.ine5605.telas.TelaTabelaArma;
+import br.ufsc.ine5605.telas.TelaTabelaItens;
 
 public class ControladorBau{
-    private ControladorPrincipal ctrlPrincipal;
     private TelaBau telaBau;
     private TelaBauSwing telaBauS;
     private Arma armaBau;
@@ -17,26 +18,29 @@ public class ControladorBau{
     private boolean temGrimorio;
     private boolean temArma;
     private boolean temConsumivel;
+    private static ControladorBau instance;
 
-    public ControladorBau(ControladorPrincipal aThis) {
+    private ControladorBau() {
         temGrimorio = false;
         temArma = false;
         temConsumivel = false;
         telaBau = new TelaBau(this);
-        ctrlPrincipal = aThis;
     }
-
+    
+    public static ControladorBau getInstance(){
+        if(instance == null){
+            instance = new ControladorBau();
+        }
+        return instance;
+    }
+    
     public void iniciaEncontro() {      
         geraItens();
-        telaBau = new TelaBau(this);
-        telaBau.mostraMenu();
-        /*
-        telaBau.mostraAcharBau();
-        telaBau.mostraMenu();*/
+        telaBauS = new TelaBauSwing(this);
+        telaBauS.mostraTelaBau();
     }
     
     public void geraItens(){
-        
         Random randArma = new Random();
         int arma = randArma.nextInt(2);
         Random randConsumivel = new Random();
@@ -76,58 +80,68 @@ public class ControladorBau{
     public void executaOpcao(String escolha){
         try{
             switch(escolha){
-                case "0": telaBau.mostraFimBau();
-                        break;
-                case "1": telaBau.mostraItens(compactarItensJogador());
+                case "0": this.telaBauS.ocultaTelaBau();
+                          this.finalizaBau();
                           break;
-                case "2": telaBau.mostraArma(compactarArmaJogador());
+                case "1": mostraItensJogador(compactarItensJogador());
+                          break;
+                case "2": mostraArmaJogador(compactarArmaJogador());
                           break;
                 case "3": if(temArma){
-                            compararArmas();
-                          }else{
-                            
-                          };
-                          break;
+                            compararArmas(compactarArmas());
+                          }
+                            break;
                 case "4": if(temConsumivel){
-                            verItens();
-                          }else{
-                            
-                          };
-                          break;
-                default: 
+                            verItens(compactarItensJogador(), compactarConsumivelBau());
+                          }
+                            break;
+                default: telaBauS.mostraTelaBau();
             }
         }catch(Exception e){
-            telaBau.mostraException(e.getMessage());
-            telaBau.mostraMenu();
+            telaBauS.mostraTelaBau();
         }
 
     }
     
     public void finalizaBau(){
-        this.ctrlPrincipal.getJogador().getDiario().addEvento(TipoEvento.BAU);
-        ctrlPrincipal.escolheEncontro();
+        ControladorPrincipal.getInstance().getJogador().getDiario().addEvento(TipoEvento.BAU);
+        ControladorPrincipal.getInstance().escolheEncontro();
     }
     
-    public void verItens() {
-        telaBau.mostraColetaConsumivel(compactarItensJogador(), compactarConsumivelBau());
+    public void verItens(ArrayList<ConteudoTelaBau> itensJogador, ConteudoTelaBau itemBau) {
+        System.out.println("RARA");
+        TelaTabelaItens tabela = new TelaTabelaItens(itensJogador, itemBau);
+        
+        tabela.mostraTela();
     }
     
-    public void compararArmas() {
-        telaBau.mostraComparacao(compactarArmas());
+    public void compararArmas(ConteudoTelaBau armas) {
+       TelaTabelaArma tabela = new TelaTabelaArma(armas);
+       tabela.mostraTela();
+    }
+    
+    public void mostraItensJogador( ArrayList<ConteudoTelaBau> itens){
+       TelaTabelaItens tabela = new TelaTabelaItens(itens); 
+       tabela.mostraTela();
+    }
+
+    public void mostraArmaJogador(ConteudoTelaBau armaJogador) {
+        TelaTabelaArma tabela = new TelaTabelaArma(armaJogador, true);
+        tabela.mostraTela();
     }
     
     public void trocarArma(){
-        this.ctrlPrincipal.getJogador().setArma(armaBau);
+        ControladorPrincipal.getInstance().getJogador().setArma(armaBau);
         this.armaBau = null;
         this.temArma = false;
-        telaBau.update(compactarItensBoolean());
+        telaBauS.updateAtributes(compactarItensBoolean());
     }
     
     public void pegarConsumivel(){
-        this.ctrlPrincipal.getJogador().addConsumivelBolsa(consumivelBau);
+        ControladorPrincipal.getInstance().getJogador().addConsumivelBolsa(consumivelBau);
         this.consumivelBau = null;
         this.temConsumivel = false;
-        telaBau.update(compactarItensBoolean());
+        telaBauS.updateAtributes(compactarItensBoolean());
     }
     
     public ConteudoTelaBau compactarItensBoolean(){
@@ -146,7 +160,7 @@ public class ControladorBau{
     
     public ArrayList<ConteudoTelaBau> compactarItensJogador(){
         ArrayList<ConteudoTelaBau> conteudos = new ArrayList();
-        ArrayList<Consumivel> consumiveis = ctrlPrincipal.getJogador().getConsumiveisBolsa();
+        ArrayList<Consumivel> consumiveis = ControladorPrincipal.getInstance().getJogador().getConsumiveisBolsa();
         for(Consumivel consumivel: consumiveis){
             ConteudoTelaBau conteudo = new ConteudoTelaBau();
             conteudo.item = consumivel;
@@ -157,14 +171,14 @@ public class ControladorBau{
     
     public ConteudoTelaBau compactarArmas(){
         ConteudoTelaBau conteudo = new ConteudoTelaBau();
-        conteudo.armaJogador = ctrlPrincipal.getJogador().getArma();
+        conteudo.armaJogador = ControladorPrincipal.getInstance().getJogador().getArma();
         conteudo.armaBau = this.armaBau;
         return conteudo;
     }
     
     public ConteudoTelaBau compactarArmaJogador(){
         ConteudoTelaBau conteudo = new ConteudoTelaBau();
-        conteudo.armaJogador = ctrlPrincipal.getJogador().getArma();
+        conteudo.armaJogador = ControladorPrincipal.getInstance().getJogador().getArma();
         return conteudo;
     }
 }
