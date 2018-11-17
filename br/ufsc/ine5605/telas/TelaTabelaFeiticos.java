@@ -38,12 +38,10 @@ public class TelaTabelaFeiticos extends JFrame{
         GridBagConstraints c = new GridBagConstraints();
         
         tabela.setPreferredScrollableViewportSize(new Dimension(500, 70));
-        tabela.setFillsViewportHeight(true); // nao sei
+        tabela.setFillsViewportHeight(true);
         
 
         c.fill = GridBagConstraints.CENTER;
-        c.gridwidth = 2;
-        c.gridheight = 4;
         c.gridx = 0;
         c.gridy = 4;
         
