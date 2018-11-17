@@ -525,17 +525,8 @@ public class TelaBatalha extends TelaEncontro{
 
     public void mostraFimBatalha(ConteudoTelaBatalha conteudoTela) {
         ocultaTela();
-        TelaFimBatalha telaFim = new TelaFimBatalha();
+        TelaFimBatalha telaFim = new TelaFimBatalha(conteudoTela);
         telaFim.mostraTela();
-    }
-    
-    public void mostraTelaAchouChave(){
-        TelaAchouChave tela =  new TelaAchouChave();
-        tela.mostraTela();
-    }
-
-    public void mostraPassagemNivel(int nivelInicial, int nivelInt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void mostraAnalise(ConteudoTelaBatalha conteudoTela) {
@@ -569,7 +560,8 @@ public class TelaBatalha extends TelaEncontro{
     }
 
     public void mostraMeusAtributos(Jogador jogador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TelaAtributosJogador tela = new TelaAtributosJogador(jogador);
+        tela.mostraTela();
     }
     
     private class GerenciadorDeBotoes implements ActionListener{

@@ -20,6 +20,7 @@ public class ConteudoTelaBatalha {
     public Arma arma;
     public Ser atacante;
     public Ser atacado;
-    public boolean ganhouChave;
+    public boolean ganhouChave = false;
+    public boolean passouDeNivel = false;
     
 }

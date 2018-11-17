@@ -31,7 +31,6 @@ public class TelaTabelaFeiticos extends JFrame{
         }
         this.atualizaDados();
         setSize(1024,768);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());

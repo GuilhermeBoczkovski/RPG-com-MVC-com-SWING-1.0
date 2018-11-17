@@ -22,7 +22,6 @@ public class TelaAnaliseMonstro extends JFrame{
         super("ANALISE MONSTRO");
         
         setSize(200,200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());
