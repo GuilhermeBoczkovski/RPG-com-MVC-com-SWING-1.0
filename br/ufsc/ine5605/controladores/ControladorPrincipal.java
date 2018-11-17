@@ -8,8 +8,6 @@ import br.ufsc.ine5605.mapeadores.MapeadorJogador;
 public class ControladorPrincipal {
     
     private Jogador jogador;
-    private ControladorFogueira ctrlFogueira;
-    private ControladorBau ctrlBau;
     private ControladorBatalhaBoss ctrlBatBoss;
     private TelaFim telaFim;
     private int teste;
@@ -32,8 +30,6 @@ public class ControladorPrincipal {
         criaJogador(nome, 10);
         mapJog = new MapeadorJogador();
         mapJog.put(this.jogador); 
-        ctrlFogueira = new ControladorFogueira(this);
-        ctrlBau = new ControladorBau(this);
         ctrlBatBoss = new ControladorBatalhaBoss(this);
         telaFim = new TelaFim(this);
         this.teste = 0;
@@ -53,11 +49,11 @@ public class ControladorPrincipal {
         switch(this.teste){
             case 0:
                     this.teste++;
-                    ctrlBau.iniciaEncontro();
+                    ControladorBau.getInstance().iniciaEncontro();
                     break;
             case 1: 
                     this.teste++;
-                    ctrlFogueira.iniciaEncontro();
+                    ControladorFogueira.getInstance().iniciaEncontro();
                     break;
             case 2: 
                     this.teste++;
@@ -65,7 +61,7 @@ public class ControladorPrincipal {
                     break;
             case 3: 
                     this.teste++;
-                    ctrlFogueira.iniciaEncontro();
+                    ControladorFogueira.getInstance().iniciaEncontro();
                     break;
         }
         /*
