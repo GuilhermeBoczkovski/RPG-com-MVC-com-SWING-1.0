@@ -212,10 +212,10 @@ public class TelaBatalha extends TelaEncontro{
     private JLabel lbNomeMonstro;
     private JLabel lbNivelMonstro;
     private JLabel lbVidaMonstro;
-    private JLabel  lbNarra1;
-    private JLabel  lbNarra2;
-    private JLabel  lbNarra3;
-    private JLabel  lbNarra4;
+    private JLabel lbNarra1;
+    private JLabel lbNarra2;
+    private JLabel lbNarra3;
+    private JLabel lbNarra4;
     private JLabel lbImgJogador;
     private JLabel lbImgAuxiliar;
     private JButton bt1;
@@ -339,6 +339,7 @@ public class TelaBatalha extends TelaEncontro{
         container.add(lbImgAuxiliar, c);
         c.ipady = 0;
         /*----------NARRACAO----------*/
+        c.gridwidth = 3;
         lbNarra1 = new JLabel();
         lbNarra1.setText("...");
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -366,6 +367,7 @@ public class TelaBatalha extends TelaEncontro{
         c.gridx = 0;
         c.gridy = 8;
         container.add(lbNarra4, c);
+        c.gridwidth = 1;
         /*----------BOTOES 1----------*/
         bt1 = new JButton();
         bt1.setText("Atacar Monstro");
@@ -500,17 +502,17 @@ public class TelaBatalha extends TelaEncontro{
             lbNomeMonstro.setText("NOME: " + dadosTelaCompactados.monstro.getNome());
             lbNivelMonstro.setText("NIVEL: " + Integer.toString(dadosTelaCompactados.jogador.getNivelInt()));
             
-            lbNarra1.setText("");
-            lbNarra2.setText("");
-            lbNarra3.setText("");
-            lbNarra4.setText("");
+            lbNarra1.setText("...");
+            lbNarra2.setText("...");
+            lbNarra3.setText("...");
+            lbNarra4.setText("...");
         }
     }
 
     public void mostraAtaque(ConteudoTelaBatalha conteudoTelaAtaqueJogador, ConteudoTelaBatalha conteudoTelaAtaqueMonstro) {
-        lbNarra1.setText(conteudoTelaAtaqueJogador.atacante.getNome() + " ataca " + conteudoTelaAtaqueJogador.atacado.getNome() + " com " + conteudoTelaAtaqueJogador.feitico.getNome() + "causando " + conteudoTelaAtaqueJogador.danoAtaque + "de dano");
-        lbNarra2.setText(conteudoTelaAtaqueMonstro.atacante.getNome() + " ataca " + conteudoTelaAtaqueMonstro.atacado.getNome() + "causando " + conteudoTelaAtaqueMonstro.danoAtaque + "de dano");
         ControladorBatalha.getInstance().atualizaDadosTela();
+        lbNarra1.setText(conteudoTelaAtaqueJogador.atacante.getNome() + " ataca " + conteudoTelaAtaqueJogador.atacado.getNome() + " com " + conteudoTelaAtaqueJogador.feitico.getNome() + " causando " + conteudoTelaAtaqueJogador.danoAtaque + " de dano");
+        lbNarra2.setText(conteudoTelaAtaqueMonstro.atacante.getNome() + " ataca " + conteudoTelaAtaqueMonstro.atacado.getNome() + " causando " + conteudoTelaAtaqueMonstro.danoAtaque + " de dano");
         if(conteudoTelaAtaqueMonstro.atacado.getVidaAtual()<=0){
             ControladorBatalha.getInstance().gameOver();
         }
@@ -521,8 +523,15 @@ public class TelaBatalha extends TelaEncontro{
         telaFeiticos.mostraTela();
     }
 
-    public void mostraFimBatalha(ConteudoTelaBatalha conteudoTelaAtaqueJogador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mostraFimBatalha(ConteudoTelaBatalha conteudoTela) {
+        ocultaTela();
+        TelaFimBatalha telaFim = new TelaFimBatalha();
+        telaFim.mostraTela();
+    }
+    
+    public void mostraTelaAchouChave(){
+        TelaAchouChave tela =  new TelaAchouChave();
+        tela.mostraTela();
     }
 
     public void mostraPassagemNivel(int nivelInicial, int nivelInt) {

@@ -73,7 +73,7 @@ public class TelaTabelaFeiticos extends JFrame{
     
     private void atualizaDados(){
         String[] nomeColunas = {"INDICE", "NOME", "DANO", "TIPO ELEMENTO"};
-        Object[][] tabelaParaPorNaTabela = new Object[4][feiticos.size()];
+        Object[][] tabelaParaPorNaTabela = new Object[feiticos.size()][4];
         int i = 0;
         for(Feitico feitico: feiticos){
             Object[] infos = {i, feitico.getNome(), feitico.getDano(), feitico.getTipoElemento()};
