@@ -14,7 +14,6 @@ import br.ufsc.ine5605.entidades.Jogador;
 
 public class ControladorBatalha {
     
-    private ControladorPrincipal controladorPrincipal;
     private Monstro monstro;
     private TelaBatalha telaBatalha;
     private int nivelInicial;
@@ -72,9 +71,9 @@ public class ControladorBatalha {
         conteudoTelaAtaqueJogador.ganhouChave = false;
         int rand = (int)(Math.random() * ((100 - 0) + 1));
         //com nivel 13 a chance de receber a chave é 100%
-        if(!(ControladorPrincipal.getInstance().getJogador().getPossuiChave()) && rand <= 100*ControladorPrincipal.getInstance().getJogador().getNivelInt()/13){
+        if((!(ControladorPrincipal.getInstance().getJogador().getPossuiChave())) && rand <= 100*ControladorPrincipal.getInstance().getJogador().getNivelInt()/13){
             ControladorPrincipal.getInstance().getJogador().setPossuiChave(true);
-            conteudoTelaAtaqueJogador.ganhouChave = true;
+        conteudoTelaAtaqueJogador.ganhouChave = true;
         }
         this.telaBatalha.mostraFimBatalha(conteudoTelaAtaqueJogador);
         ControladorPrincipal.getInstance().getJogador().ganhaExperiencia();
