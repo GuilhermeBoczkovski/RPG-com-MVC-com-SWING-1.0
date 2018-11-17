@@ -1,6 +1,5 @@
 package br.ufsc.ine5605.controladores;
 import br.ufsc.ine5605.telas.TelaBauSwing;
-import br.ufsc.ine5605.telas.TelaBau;
 import br.ufsc.ine5605.entidades.TipoEvento;
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,7 +10,6 @@ import br.ufsc.ine5605.telas.TelaTabelaArma;
 import br.ufsc.ine5605.telas.TelaTabelaItens;
 
 public class ControladorBau{
-    private TelaBau telaBau;
     private TelaBauSwing telaBauS;
     private Arma armaBau;
     private Consumivel consumivelBau;
@@ -24,7 +22,6 @@ public class ControladorBau{
         temGrimorio = false;
         temArma = false;
         temConsumivel = false;
-        telaBau = new TelaBau(this);
     }
     
     public static ControladorBau getInstance(){
