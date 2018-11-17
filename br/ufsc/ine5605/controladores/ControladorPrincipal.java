@@ -31,7 +31,7 @@ public class ControladorPrincipal {
         mapJog = new MapeadorJogador();
         mapJog.put(this.jogador); 
         ctrlBatBoss = new ControladorBatalhaBoss(this);
-        telaFim = new TelaFim(this);
+        telaFim = new TelaFim();
         this.teste = 0;
     }
 
@@ -87,7 +87,7 @@ public class ControladorPrincipal {
     }
     
     public void gameOver(){
-        telaFim.mostraTelaFim();
+        telaFim.mostraTela();
     }
     
     public void criaJogador(String nome){

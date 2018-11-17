@@ -75,13 +75,15 @@ public class ControladorBatalha {
             ControladorPrincipal.getInstance().getJogador().setPossuiChave(true);
         conteudoTelaAtaqueJogador.ganhouChave = true;
         }
-        this.telaBatalha.mostraFimBatalha(conteudoTelaAtaqueJogador);
         ControladorPrincipal.getInstance().getJogador().ganhaExperiencia();
         if(this.nivelInicial<ControladorPrincipal.getInstance().getJogador().getNivelInt()){
-            this.telaBatalha.mostraPassagemNivel(nivelInicial, ControladorPrincipal.getInstance().getJogador().getNivelInt());
+            conteudoTelaAtaqueJogador.passouDeNivel = true;
         }
-        this.atualizaDadosTela();
+        this.telaBatalha.mostraFimBatalha(conteudoTelaAtaqueJogador);
         ControladorPrincipal.getInstance().getJogador().getDiario().addEvento(TipoEvento.BATALHA);
+    }
+    
+    public void saiDaBatalha(){
         ControladorPrincipal.getInstance().escolheEncontro();
     }
 
