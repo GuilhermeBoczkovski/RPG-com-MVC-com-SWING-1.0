@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import br.ufsc.ine5605.controladores.ControladorBatalha;
-import br.ufsc.ine5605.controladores.ControladorPrincipal;
 import br.ufsc.ine5605.entidades.Jogador;
 
 public class TelaBatalha extends TelaEncontro{
@@ -397,8 +396,7 @@ public class TelaBatalha extends TelaEncontro{
         container.add(bt3, c);
         
         bt4 = new JButton();
-        bt4.setText("Ver Itens");
-        bt4.setActionCommand("4");
+        bt4.setText("-");
         c.fill = GridBagConstraints.HORIZONTAL;
         //c.weightx = 0.5;
         c.gridx = 0;
@@ -534,29 +532,18 @@ public class TelaBatalha extends TelaEncontro{
         telaAnalise.mostraTela();
     }
 
-    public void mostraItens(ArrayList<ConteudoTelaBatalha> conteudoTelaS, ConteudoTelaBatalha conteudoTela) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public void mostraFeiticos(ArrayList<ConteudoTelaBatalha> conteudoTelaS) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public void mostraExcecao(String message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void mostraMenuBatalha() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     public void mostraMenuFeitico() {
         TelaMenuFeitico telaMenuFeitico = new TelaMenuFeitico();
         telaMenuFeitico.mostraTela();
     }
 
-    public void mostraMenuItens(ArrayList<ConteudoTelaBatalha> compactar) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mostraMenuItens(ArrayList<ConteudoTelaBatalha> conteudoTelaS) {
+        TelaTabelaItens tela = new TelaTabelaItens(conteudoTelaS, true);
+        tela.mostraTela();
     }
 
     public void mostraMeusAtributos(Jogador jogador) {

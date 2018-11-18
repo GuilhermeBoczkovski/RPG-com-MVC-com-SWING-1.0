@@ -19,7 +19,7 @@ class TelaMenuFeitico extends JFrame{
     private JLabel lb1;
     
     public TelaMenuFeitico() {
-        super("NEW GAME");
+        super("FEITICOS");
         
         setSize(400,300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

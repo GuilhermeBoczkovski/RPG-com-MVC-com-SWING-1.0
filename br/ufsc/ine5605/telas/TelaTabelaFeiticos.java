@@ -26,6 +26,43 @@ public class TelaTabelaFeiticos extends JFrame{
         super("ATAQUE");
         feiticos = new ArrayList<>();
         for(ConteudoTelaBatalha cont : conteudos){
+            feiticos.add(cont.feitico);
+        }
+        this.atualizaDados();
+        setSize(1024,768);
+        
+        Container container = getContentPane();
+        container.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        
+        tabela.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        tabela.setFillsViewportHeight(true);
+        
+
+        c.fill = GridBagConstraints.CENTER;
+        c.gridx = 0;
+        c.gridy = 4;
+        
+        spBaseTabela = new JScrollPane(tabela);
+        container.add(spBaseTabela, c);
+        
+        setLocationRelativeTo(null);
+        
+        btAtaque = new JButton("ATACAAAAAR");
+        btAtaque.setActionCommand("ATAQUE");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        container.add(btAtaque, c);
+        
+        TelaTabelaFeiticos.GerenciadorDeBotoes btManager = new TelaTabelaFeiticos.GerenciadorDeBotoes();
+        btAtaque.addActionListener(btManager);
+    }
+    
+    public TelaTabelaFeiticos(ArrayList<ConteudoTelaBatalha> conteudos, ConteudoTelaBatalha paralepal){
+        super("ATAQUE");
+        feiticos = new ArrayList<>();
+        for(ConteudoTelaBatalha cont : conteudos){
             System.out.println(cont.feitico.getNome());
             feiticos.add(cont.feitico);
         }

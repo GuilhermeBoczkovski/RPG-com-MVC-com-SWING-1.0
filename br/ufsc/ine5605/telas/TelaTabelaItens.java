@@ -27,8 +27,10 @@ public class TelaTabelaItens extends JFrame{
     private Item itemTabelaBau;
     private JButton btOk;
     private JButton btPegar;
+    private JButton btUsar;
     private JLabel txtBolsa;
     private JLabel txtBau;
+    private int indiceItem;
     
     public TelaTabelaItens(ArrayList<ConteudoTelaBau> itens){
         super("BOLSA");
@@ -135,6 +137,52 @@ public class TelaTabelaItens extends JFrame{
         btOk.addActionListener(btManager);
         btPegar.addActionListener(btManager);
     }
+
+    TelaTabelaItens(ArrayList<ConteudoTelaBatalha> conteudoTelaS , boolean b) {
+        super("ITENS JOGADOR");
+        indiceItem = -1;
+        setSize(600,330);
+        
+        Container container = getContentPane();
+        container.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        
+        
+        this.itensTabelaJogador = new ArrayList<>();
+        for(ConteudoTelaBatalha conteudo: conteudoTelaS){
+            itensTabelaJogador.add(conteudo.consumivel);
+        }
+        this.atualizaDadosSoParaJogador();
+        
+        tabelaBolsa.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        
+        c.fill = GridBagConstraints.CENTER;
+        c.gridx = 0;
+        c.gridy = 4;
+        
+        spBaseTabela = new JScrollPane(tabelaBolsa);
+        container.add(spBaseTabela, c);
+        
+        setLocationRelativeTo(null);
+        
+        btUsar = new JButton("USAR");
+        btUsar.setActionCommand("USAR");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        container.add(btUsar, c);
+        
+        btOk = new JButton("VOLTAR");
+        btOk.setActionCommand("OK");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 1;
+        container.add(btOk, c);
+        
+        TelaTabelaItens.GerenciadorDeBotoes btManager = new TelaTabelaItens.GerenciadorDeBotoes();
+        btOk.addActionListener(btManager);
+        btUsar.addActionListener(btManager);
+    }
     
     public void mostraTela(){
         super.setVisible(true);
@@ -173,12 +221,20 @@ public class TelaTabelaItens extends JFrame{
         }
         this.tabelaBolsa = new JTable(tabelaParaPorNaTabelaBolsa, nomeColunas);
     }
-
+    
+    public void setIndiceItem(){
+        this.indiceItem = tabelaBolsa.getSelectedRow();
+    }
+    
     private class GerenciadorDeBotoes implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(!e.getActionCommand().equals("OK")){
+            if(e.getActionCommand().equals("USAR")){
+                ocultaTela();
+                setIndiceItem();
+                ControladorBatalha.getInstance().usarItem(indiceItem);
+            }else if(!e.getActionCommand().equals("OK")){
                 ocultaTela();
                 ControladorBau.getInstance().pegarConsumivel();
             } else {
