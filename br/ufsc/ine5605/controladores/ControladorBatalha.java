@@ -92,17 +92,6 @@ public class ControladorBatalha {
         this.telaBatalha.mostraAnalise(conteudoTela);
     }
 
-    public void verItens(){
-        Arma arma = ControladorPrincipal.getInstance().getJogador().getArma();
-        ArrayList<Consumivel> consumiveis = ControladorPrincipal.getInstance().getJogador().getConsumiveisBolsa();
-        ArrayList<ConteudoTelaBatalha> conteudoTelaS = new ArrayList();
-        for(int i = 0; i < consumiveis.size(); i++){
-            conteudoTelaS.add(compactar(consumiveis.get(i)));
-        }
-        ConteudoTelaBatalha conteudoTela = compactar(arma);
-        this.telaBatalha.mostraItens(conteudoTelaS, conteudoTela);
-    }
-
     public void verFeiticos(ConteudoTelaBatalha conteudoTela){
         try{
             TipoElemento tipoElemento;
@@ -126,8 +115,7 @@ public class ControladorBatalha {
             ArrayList<ConteudoTelaBatalha> conteudoTelaS = this.compactar(feiticos);
             telaBatalha.mostraFeiticos(conteudoTelaS);
         }catch(Exception e){
-            this.telaBatalha.mostraExcecao(e.getMessage());
-            telaBatalha.mostraMenuBatalha();
+            telaBatalha.mostraTela();
         }
     }
 
@@ -144,7 +132,6 @@ public class ControladorBatalha {
                     this.telaBatalha.mostraMenuFeitico();
                     break;
                 case "4" :
-                    this.verItens();
                     break;
                 case "5" :
                     this.telaBatalha.mostraMenuItens(compactar(ControladorPrincipal.getInstance().getJogador().getConsumiveisBolsa(),1));
@@ -156,8 +143,7 @@ public class ControladorBatalha {
                     
             }
         }catch(Exception e){
-            this.telaBatalha.mostraExcecao(e.getMessage());
-            this.telaBatalha.mostraMenuBatalha();
+            this.telaBatalha.mostraTela();
         }
     }
 
@@ -195,15 +181,14 @@ public class ControladorBatalha {
     
     public void usarItem(int indice){
         try{
-            if(indice < ControladorPrincipal.getInstance().getJogador().getConsumiveisBolsa().size()){
+            if(indice < ControladorPrincipal.getInstance().getJogador().getConsumiveisBolsa().size() && indice != -1){
                 ControladorPrincipal.getInstance().getJogador().usarItem(indice);
                 this.atualizaDadosTela();
-                this.telaBatalha.mostraMenuBatalha();
+                this.telaBatalha.mostraTela();
             }else{
             }
         }catch(Exception e){
-            this.telaBatalha.mostraExcecao(e.getMessage());
-            this.telaBatalha.mostraMenuBatalha();
+            this.telaBatalha.mostraTela();
         }
     }
     
