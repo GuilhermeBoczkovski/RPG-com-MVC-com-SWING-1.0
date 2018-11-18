@@ -101,12 +101,18 @@ public class ControladorBau{
     }
     
     public void finalizaBau(){
-        ControladorPrincipal.getInstance().getJogador().getDiario().addEvento(TipoEvento.BAU);
-        ControladorPrincipal.getInstance().escolheEncontro();
+        if(temGrimorio){
+            TelaBauSwing telaFinal = new TelaBauSwing();
+            telaFinal.mostraTelaBau();
+            ControladorPrincipal.getInstance().getJogador().getDiario().addEvento(TipoEvento.BAU);
+            ControladorPrincipal.getInstance().escolheEncontro();
+        } else {
+            ControladorPrincipal.getInstance().getJogador().getDiario().addEvento(TipoEvento.BAU);
+            ControladorPrincipal.getInstance().escolheEncontro();
+        }
     }
     
     public void verItens(ArrayList<ConteudoTelaBau> itensJogador, ConteudoTelaBau itemBau) {
-        System.out.println("RARA");
         TelaTabelaItens tabela = new TelaTabelaItens(itensJogador, itemBau);
         
         tabela.mostraTela();

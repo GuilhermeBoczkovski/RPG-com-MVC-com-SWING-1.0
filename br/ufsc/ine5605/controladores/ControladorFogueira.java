@@ -6,6 +6,7 @@ import br.ufsc.ine5605.entidades.Feitico;
 import br.ufsc.ine5605.entidades.TipoElemento;
 import br.ufsc.ine5605.entidades.TipoEvento;
 import br.ufsc.ine5605.telas.TelaCriarFeitico;
+import br.ufsc.ine5605.telas.TelaDeAviso;
 import br.ufsc.ine5605.telas.TelaDeletarCoisasFogueira;
 import br.ufsc.ine5605.telas.TelaListagemBasicaFogueira;
 import br.ufsc.ine5605.telas.TelaFogueiraSwing;
@@ -43,9 +44,11 @@ public class ControladorFogueira {
                         break;
                 case "5": mostraMenuCriarFeitico();
                         break;
-                case "6": this.mostraMenuEsquecerFeiticos(compactarFeitico());
+                case "6": mostraMenuEsquecerFeiticos(compactarFeitico());
                         break;
-                case "7": if(ControladorPrincipal.getInstance().getJogador().getPossuiChave()){irParaBoss();}
+                case "7": salvar();
+                        break;
+                case "8": if(ControladorPrincipal.getInstance().getJogador().getPossuiChave()){irParaBoss();}
                         break;
                 default:
             }
@@ -113,6 +116,7 @@ public class ControladorFogueira {
             }
                 ControladorPrincipal.getInstance().getJogador().setGrimorios(ControladorPrincipal.getInstance().getJogador().getGrimorios()-1);
                 TelaCriarFeitico telaAcerto = new TelaCriarFeitico(true);
+                this.telaFogueiraS.updateData(this.compactaJogador());
                 telaAcerto.mostraTela();
         }else{
             TelaCriarFeitico telaErro = new TelaCriarFeitico(false);
@@ -228,6 +232,12 @@ public class ControladorFogueira {
             eventosCompactados.add(novoConteudo);
         }
         return eventosCompactados;
+    }
+
+    private void salvar() {
+        ControladorPrincipal.getInstance().salvar();
+        TelaDeAviso aviso = new TelaDeAviso("Salvo com sucesso");
+        aviso.mostraTela();
     }
     
 }

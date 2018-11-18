@@ -40,8 +40,12 @@ public class ControladorPrincipal {
         jogador = mapJog.get(nome);
     }
     
-    Jogador getJogador() {
+    public Jogador getJogador() {
         return this.jogador;
+    }
+    
+    public void salvar(){
+        this.mapJog.persist();
     }
 
     public void escolheEncontro(){
