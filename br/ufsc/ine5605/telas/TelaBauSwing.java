@@ -177,7 +177,8 @@ public class TelaBauSwing extends JFrame{
         
         int i = 6;
         if(temArma){
-            btComparaArmas = new JButton("PEGAR ARMA DO BAU");
+            btComparaArmas = new JButton();
+            btComparaArmas.setText("PEGAR ARMA DO BAU");
             btComparaArmas.setActionCommand("3");
             c.fill = GridBagConstraints.HORIZONTAL;
             c.gridwidth = 3;
@@ -189,7 +190,8 @@ public class TelaBauSwing extends JFrame{
         }
         
         if(temConsumivel){
-            btVerItensBau = new JButton("PEGAR CONSUMÍVEL DO BAU");
+            btVerItensBau = new JButton();
+            btVerItensBau.setText("PEGAR CONSUMÍVEL DO BAU");
             btVerItensBau.setActionCommand("4");
             c.gridwidth = 3;
             c.fill = GridBagConstraints.HORIZONTAL;
@@ -211,6 +213,36 @@ public class TelaBauSwing extends JFrame{
         }
     }
     
+    public TelaBauSwing(){
+        super("AVISO");
+        
+        setSize(500,300);
+        
+        Container container = getContentPane();
+        container.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        
+        setLocationRelativeTo(null);
+        
+        text1 = new JLabel();
+        text1.setText("Voce pegou o grimorio e sai da sala");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        container.add(text1, c);
+        
+        
+        btSair = new JButton("OK");
+        btSair.setActionCommand("SAIR");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 1;
+        container.add(btSair, c);
+        
+        TelaBauSwing.GerenciadorDeBotoes btManager = new TelaBauSwing.GerenciadorDeBotoes();
+        btSair.addActionListener(btManager);
+    }
+    
     public void mostraTelaBau(){
         setVisible(true);
     }
@@ -223,13 +255,25 @@ public class TelaBauSwing extends JFrame{
         this.temArma = itensBau.temArma;
         this.temConsumivel = itensBau.temConsumivel;
         this.temGrimorio = itensBau.temGrimorio;
+        
+        if(btComparaArmas != null && temArma == false){
+            btComparaArmas.setText("---");
+        }
+        
+        if(btVerItensBau != null && temConsumivel == false){
+            btVerItensBau.setText("---");
+        }
     }
     
     private class GerenciadorDeBotoes implements ActionListener{
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            ControladorBau.getInstance().executaOpcao(e.getActionCommand());
+            if(!e.getActionCommand().equals("SAIR")){
+                ControladorBau.getInstance().executaOpcao(e.getActionCommand());
+            } else {
+                ocultaTelaBau();
+            }
         }
         
     }

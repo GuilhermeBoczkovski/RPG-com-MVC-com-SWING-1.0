@@ -34,18 +34,19 @@ public class TelaFogueiraSwing extends JFrame{
     private JLabel lbNarra3;
     private JLabel lbNarra4;
     private JLabel lbGrimorios;
+    private final JButton btSalvar;
     
     public TelaFogueiraSwing(ConteudoTelaFogueira jogador){
         super("FOGUEIRA");
         
-        setSize(900,700);
+        setSize(900,735);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         
-        c.ipadx = 160;
+        c.ipadx = 180;
         
         /*----------DADOS JOGADOR----------*/
         lbNome = new JLabel();
@@ -180,16 +181,25 @@ public class TelaFogueiraSwing extends JFrame{
         c.gridy = 11;
         container.add(btSair, c);
         
+        btSalvar = new JButton("SALVAR JOGO");
+        btSalvar.setActionCommand("7");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 12;
+        container.add(btSalvar, c);
+        
         if(jogador.jogador.getPossuiChave()){
             btSalaBoss = new JButton("IR PARA A SALA DO BOSS");
-            btSalaBoss.setActionCommand("7");
+            btSalaBoss.setActionCommand("8");
             c.fill = GridBagConstraints.HORIZONTAL;
             c.gridx = 0;
-            c.gridy = 12;
+            c.gridy = 13;
             container.add(btSalaBoss, c);
         }
         TelaFogueiraSwing.GerenciadorDeBotoes btManager = new TelaFogueiraSwing.GerenciadorDeBotoes();
         btSair.addActionListener(btManager);
+        btSalvar.addActionListener(btManager);
         btSalaBoss.addActionListener(btManager);
         btEsquecerFeiticos.addActionListener(btManager);
         btCriarFeiticos.addActionListener(btManager);
@@ -205,6 +215,13 @@ public class TelaFogueiraSwing extends JFrame{
     
     public void ocultaTela(){
         super.setVisible(false);
+    }
+
+    public void updateData(ConteudoTelaFogueira jogador) {
+        if(jogador.jogador != null){
+            lbDanoArma.setText("DANO DA ARMA: " + jogador.jogador.getArma().getDano());
+            lbGrimorios.setText("GRIMORIOS: " + jogador.jogador.getGrimorios());
+        }
     }
     
     private class GerenciadorDeBotoes implements ActionListener{
