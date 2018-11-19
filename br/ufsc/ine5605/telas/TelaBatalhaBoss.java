@@ -136,7 +136,7 @@ public class TelaBatalhaBoss  extends TelaEncontro{
         /*----------IMAGENS----------*/
         c.ipady = 400;
         lbImgJogador = new JLabel();
-        lbImgJogador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/JogadorAtacando.png")));
+        lbImgJogador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/JogadorAtacando.PNG")));
         c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 0;
         c.gridy = 4;
@@ -149,7 +149,7 @@ public class TelaBatalhaBoss  extends TelaEncontro{
         container.add(lbVazia, c);
         
         lbImgAuxiliar = new JLabel();
-        lbImgAuxiliar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/Monstro.png")));
+        lbImgAuxiliar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/Monstro.PNG")));
         c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 2;
         c.gridy = 4;
