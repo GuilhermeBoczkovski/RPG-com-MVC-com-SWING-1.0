@@ -60,7 +60,7 @@ public class TelaSavedGame extends JFrame{
         c.fill = GridBagConstraints.HORIZONTAL;
         //c.weightx = 0.5;
         c.gridx = 1;
-        c.gridy = 1;
+        c.gridy = 2;
         container.add(btDelete, c);
         
         btNewGame = new JButton();
@@ -68,8 +68,8 @@ public class TelaSavedGame extends JFrame{
         btNewGame.setActionCommand("NEW GAME");
         c.fill = GridBagConstraints.HORIZONTAL;
         //c.weightx = 0.5;
-        c.gridx = 2;
-        c.gridy = 1;
+        c.gridx = 1;
+        c.gridy = 3;
         container.add(btNewGame, c);
         
         //fazendo a tabela
