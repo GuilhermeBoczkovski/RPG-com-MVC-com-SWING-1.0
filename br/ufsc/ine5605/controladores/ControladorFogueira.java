@@ -54,7 +54,6 @@ public class ControladorFogueira {
             }
         } catch(Exception e){
             System.out.println("ERROO");
-            telaFogueiraS.mostraTela();
         }
     }
     
@@ -183,6 +182,7 @@ public class ControladorFogueira {
     }
     
     public void irParaBoss(){
+        this.telaFogueiraS.ocultaTela();
         ControladorPrincipal.getInstance().irParaBoss();
     }
     

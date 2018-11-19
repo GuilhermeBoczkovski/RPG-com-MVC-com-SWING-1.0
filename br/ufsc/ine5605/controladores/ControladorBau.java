@@ -6,6 +6,7 @@ import java.util.Random;
 import br.ufsc.ine5605.entidades.Arma;
 import br.ufsc.ine5605.entidades.Consumivel;
 import br.ufsc.ine5605.telas.ConteudoTelaBau;
+import br.ufsc.ine5605.telas.TelaDeAviso;
 import br.ufsc.ine5605.telas.TelaTabelaArma;
 import br.ufsc.ine5605.telas.TelaTabelaItens;
 
@@ -92,24 +93,19 @@ public class ControladorBau{
                             verItens(compactarItensJogador(), compactarConsumivelBau());
                           }
                             break;
-                default: telaBauS.mostraTelaBau();
+                default: 
             }
         }catch(Exception e){
-            telaBauS.mostraTelaBau();
+            TelaDeAviso erro = new TelaDeAviso(e.getMessage());
+            erro.mostraTela();
         }
 
     }
     
     public void finalizaBau(){
-        if(temGrimorio){
-            TelaBauSwing telaFinal = new TelaBauSwing();
-            telaFinal.mostraTelaBau();
-            ControladorPrincipal.getInstance().getJogador().getDiario().addEvento(TipoEvento.BAU);
-            ControladorPrincipal.getInstance().escolheEncontro();
-        } else {
-            ControladorPrincipal.getInstance().getJogador().getDiario().addEvento(TipoEvento.BAU);
-            ControladorPrincipal.getInstance().escolheEncontro();
-        }
+        ControladorPrincipal.getInstance().getJogador().getDiario().addEvento(TipoEvento.BAU);
+        ControladorPrincipal.getInstance().escolheEncontro();
+        
     }
     
     public void verItens(ArrayList<ConteudoTelaBau> itensJogador, ConteudoTelaBau itemBau) {
