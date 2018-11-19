@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import br.ufsc.ine5605.controladores.ControladorBau;
+import br.ufsc.ine5605.controladores.ControladorFogueira;
 import java.util.ArrayList;
 
 
@@ -170,7 +171,11 @@ public class TelaBauSwing extends JFrame{
         container.add(btMostraArma, c);
         
         btSair = new JButton("SAIR");
-        btSair.setActionCommand("0");
+        if(!temGrimorio){
+            btSair.setActionCommand("0");
+        } else {
+            btSair.setActionCommand("SAIR");
+        }
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 2;
         c.gridy = 5;
@@ -227,7 +232,7 @@ public class TelaBauSwing extends JFrame{
         setLocationRelativeTo(null);
         
         text1 = new JLabel();
-        text1.setText("Voce pegou o grimorio e sai da sala");
+        text1.setText("Voce pegou o grimorio e saiu da sala");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
@@ -235,7 +240,7 @@ public class TelaBauSwing extends JFrame{
         
         
         btSair = new JButton("OK");
-        btSair.setActionCommand("SAIR");
+        btSair.setActionCommand("0");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 1;
@@ -271,10 +276,15 @@ public class TelaBauSwing extends JFrame{
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(!e.getActionCommand().equals("SAIR")){
-                ControladorBau.getInstance().executaOpcao(e.getActionCommand());
-            } else {
+            if(e.getActionCommand().equals("SAIR")){
                 ocultaTelaBau();
+                TelaBauSwing telaDeSaida = new TelaBauSwing();
+                telaDeSaida.mostraTelaBau();
+            } else if (e.getActionCommand().equals("0")){
+                ControladorBau.getInstance().executaOpcao(e.getActionCommand());
+                ocultaTelaBau();
+            } else {
+                ControladorBau.getInstance().executaOpcao(e.getActionCommand());
             }
         }
         
