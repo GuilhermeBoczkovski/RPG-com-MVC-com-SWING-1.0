@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import br.ufsc.ine5605.controladores.ControladorFogueira;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 public class TelaFogueiraSwing extends JFrame{
     private JButton btSair;
@@ -85,8 +86,11 @@ public class TelaFogueiraSwing extends JFrame{
         container.add(lbGrimorios, c);
         
         /*----------IMAGENS----------*/
-        c.ipady = 400;
-        lbImgJogador = new JLabel("IMAGEM JOGADOR");
+        
+        ImageIcon imgFogueira = new ImageIcon("imagens\\fogueira.png");
+        c.ipady = 200;
+        lbImgJogador = new JLabel();
+        lbImgJogador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/jogador.png")));
         c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 0;
         c.gridy = 5;
@@ -98,7 +102,8 @@ public class TelaFogueiraSwing extends JFrame{
         c.gridy = 5;
         container.add(lbVazia, c);
         
-        lbImgAuxiliar = new JLabel("IMAGEM FOGUEIRA");
+        lbImgAuxiliar = new JLabel();
+        lbImgAuxiliar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/fogueira.png")));
         c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 2;
         c.gridy = 5;
