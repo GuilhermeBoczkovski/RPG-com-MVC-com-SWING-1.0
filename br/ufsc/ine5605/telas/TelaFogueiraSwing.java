@@ -90,7 +90,7 @@ public class TelaFogueiraSwing extends JFrame{
         ImageIcon imgFogueira = new ImageIcon("imagens\\fogueira.png");
         c.ipady = 200;
         lbImgJogador = new JLabel();
-        lbImgJogador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/jogador.png")));
+        lbImgJogador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/Jogador.png")));
         c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 0;
         c.gridy = 5;
@@ -103,7 +103,7 @@ public class TelaFogueiraSwing extends JFrame{
         container.add(lbVazia, c);
         
         lbImgAuxiliar = new JLabel();
-        lbImgAuxiliar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/fogueira.png")));
+        lbImgAuxiliar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/Fogueira.png")));
         c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 2;
         c.gridy = 5;

@@ -55,7 +55,7 @@ public class TelaBauSwing extends JFrame{
         /*----------IMAGENS----------*/
         c.ipady = 200;
         JLabel lbImgJogador = new JLabel();
-        lbImgJogador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/jogador.png")));
+        lbImgJogador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/Jogador.png")));
         c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 0;
         c.gridy = 0;
@@ -68,7 +68,7 @@ public class TelaBauSwing extends JFrame{
         container.add(espaco, c);
         
         JLabel lbImgAuxiliar = new JLabel();
-        lbImgAuxiliar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/bau.png")));
+        lbImgAuxiliar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/Bau.png")));
         c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 2;
         c.gridy = 0;
