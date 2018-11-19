@@ -11,15 +11,11 @@ import br.ufsc.ine5605.controladores.ControladorGeral;
 
 public class TelaMenuInicial extends JFrame{
     
-    private final ControladorGeral controladorGeral;
-    
     private JButton btNewGame;
     private JButton btContinue;
     
-    public TelaMenuInicial(ControladorGeral controladorGeral){
+    public TelaMenuInicial(){
         super("MENU INICIAL");
-        
-        this.controladorGeral = controladorGeral;
         
         setSize(512,384);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,10 +59,10 @@ public class TelaMenuInicial extends JFrame{
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == btNewGame){
                 ocultaTelaMenuInicial();
-                controladorGeral.inicio();
+                ControladorGeral.getInstance().inicio();
             }else if(e.getSource() == btContinue){
                 ocultaTelaMenuInicial();
-                
+                ControladorGeral.getInstance().continuar();
             }
         }
         
