@@ -1,6 +1,7 @@
 package br.ufsc.ine5605.telas;
 
 import br.ufsc.ine5605.controladores.ControladorBatalha;
+import br.ufsc.ine5605.controladores.ControladorBatalhaBoss;
 import br.ufsc.ine5605.controladores.ControladorBau;
 import br.ufsc.ine5605.entidades.Consumivel;
 import java.awt.Container;
@@ -31,6 +32,7 @@ public class TelaTabelaItens extends JFrame{
     private JLabel txtBolsa;
     private JLabel txtBau;
     private int indiceItem;
+    private boolean ehBoss;
     
     public TelaTabelaItens(ArrayList<ConteudoTelaBau> itens){
         super("BOLSA");
@@ -138,11 +140,11 @@ public class TelaTabelaItens extends JFrame{
         btPegar.addActionListener(btManager);
     }
 
-    TelaTabelaItens(ArrayList<ConteudoTelaBatalha> conteudoTelaS , boolean b) {
+    TelaTabelaItens(ArrayList<ConteudoTelaBatalha> conteudoTelaS , boolean ehBoss) {
         super("ITENS JOGADOR");
         indiceItem = -1;
         setSize(600,330);
-        
+        this.ehBoss = ehBoss;
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -233,7 +235,11 @@ public class TelaTabelaItens extends JFrame{
             if(e.getActionCommand().equals("USAR")){
                 ocultaTela();
                 setIndiceItem();
-                ControladorBatalha.getInstance().usarItem(indiceItem);
+                if(ehBoss){
+                    ControladorBatalhaBoss.getInstance().usarItem(indiceItem);
+                }else{
+                    ControladorBatalha.getInstance().usarItem(indiceItem);
+                }
             }else if(!e.getActionCommand().equals("OK")){
                 ocultaTela();
                 ControladorBau.getInstance().pegarConsumivel();

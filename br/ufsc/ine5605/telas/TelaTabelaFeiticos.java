@@ -1,6 +1,7 @@
 package br.ufsc.ine5605.telas;
 
 import br.ufsc.ine5605.controladores.ControladorBatalha;
+import br.ufsc.ine5605.controladores.ControladorBatalhaBoss;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -21,6 +22,7 @@ public class TelaTabelaFeiticos extends JFrame{
     private ArrayList<Feitico> feiticos;
     private JButton btAtaque;
     private int indiceFeitico;
+    private boolean boss;
     
     public TelaTabelaFeiticos(ArrayList<ConteudoTelaBatalha> conteudos){
         super("ATAQUE");
@@ -59,11 +61,10 @@ public class TelaTabelaFeiticos extends JFrame{
         btAtaque.addActionListener(btManager);
     }
     
-    public TelaTabelaFeiticos(ArrayList<ConteudoTelaBatalha> conteudos, ConteudoTelaBatalha paralepal){
-        super("ATAQUE");
+    public TelaTabelaFeiticos(ArrayList<ConteudoTelaBatalha> conteudos, boolean b){
+        super("FEITICOS");
         feiticos = new ArrayList<>();
         for(ConteudoTelaBatalha cont : conteudos){
-            System.out.println(cont.feitico.getNome());
             feiticos.add(cont.feitico);
         }
         this.atualizaDados();
@@ -86,8 +87,8 @@ public class TelaTabelaFeiticos extends JFrame{
         
         setLocationRelativeTo(null);
         
-        btAtaque = new JButton("ATACAAAAAR");
-        btAtaque.setActionCommand("ATAQUE");
+        btAtaque = new JButton("VOLTAR");
+        btAtaque.setActionCommand("VOLTAR");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
@@ -125,16 +126,28 @@ public class TelaTabelaFeiticos extends JFrame{
         return this.indiceFeitico; 
     }
     
+    public void ehBoss(){
+        this.boss = true;
+    }
+    
     private class GerenciadorDeBotoes implements ActionListener{
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            ocultaTela();
-            setIndiceFeitico();
-            int i = getIndiceFeitico();
-            ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
-            conteudoTela.indiceFeitico = i;
-            ControladorBatalha.getInstance().atacar(conteudoTela);
+            if(e.getActionCommand().equals("VOLTAR")){
+                ocultaTela();
+            }else{
+                ocultaTela();
+                setIndiceFeitico();
+                int i = getIndiceFeitico();
+                ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
+                conteudoTela.indiceFeitico = i;
+                if(boss){
+                    ControladorBatalhaBoss.getInstance().atacar(conteudoTela);
+                }else{
+                    ControladorBatalha.getInstance().atacar(conteudoTela);
+                }
+            }
         }
         
     }
