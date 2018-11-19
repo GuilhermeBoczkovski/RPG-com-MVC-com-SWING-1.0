@@ -9,10 +9,11 @@ import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import br.ufsc.ine5605.entidades.Jogador;
+import java.util.ArrayList;
 
 public class MapeadorJogador {
 
-    private HashMap<String, Jogador> cacheJogador = new HashMap<>();
+    private ArrayList<Jogador> cacheJogador = new ArrayList<>();
     private final String filename = "Jogador.jooj";
 
     public MapeadorJogador(){
@@ -20,11 +21,28 @@ public class MapeadorJogador {
     }
 
     public Jogador get(String nomeJogador){
-        return cacheJogador.get(nomeJogador);
+        int i = 0;
+        for(Jogador jogador : cacheJogador){
+            if(jogador.getNome().equals(nomeJogador)){
+                break;
+            }else{
+                i++;
+            }
+        }
+        return cacheJogador.get(i);
     }
-
+    
+    public Jogador get(int i){
+        return cacheJogador.get(i);
+    }
+    
     public void put(Jogador jogador){
-        cacheJogador.put(jogador.getNome(), jogador);
+        cacheJogador.add(jogador);
+        persist();
+    }
+    
+    public void exclude(int i){
+        cacheJogador.remove(i);
         persist();
     }
 
@@ -52,7 +70,7 @@ public class MapeadorJogador {
             FileInputStream fIn = new FileInputStream(filename);
             ObjectInputStream oIn = new ObjectInputStream(fIn);
 
-            this.cacheJogador = (HashMap) oIn.readObject();
+            this.cacheJogador = (ArrayList) oIn.readObject();
 
             oIn.close();
             fIn.close();
@@ -67,7 +85,7 @@ public class MapeadorJogador {
         }
     }
 
-    public Collection getList(){
-        return this.cacheJogador.values();
+    public ArrayList<Jogador> getList(){
+        return this.cacheJogador;
     }
 }
