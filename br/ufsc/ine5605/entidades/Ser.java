@@ -1,6 +1,8 @@
 package br.ufsc.ine5605.entidades;
 
-public class Ser{
+import java.io.Serializable;
+
+public class Ser implements Serializable{
     private final String nome;
     private int vidaAtual;
     private int vidaTotal;
