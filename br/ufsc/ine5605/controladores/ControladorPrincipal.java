@@ -8,7 +8,6 @@ import br.ufsc.ine5605.mapeadores.MapeadorJogador;
 public class ControladorPrincipal {
     
     private Jogador jogador;
-    private ControladorBatalhaBoss ctrlBatBoss;
     private TelaFim telaFim;
     private int teste;
     private MapeadorJogador mapJog;
@@ -29,8 +28,7 @@ public class ControladorPrincipal {
     private ControladorPrincipal(String nome, int i){
         criaJogador(nome, 10);
         mapJog = new MapeadorJogador();
-        mapJog.put(this.jogador); 
-        ctrlBatBoss = new ControladorBatalhaBoss(this);
+        mapJog.put(this.jogador);
         telaFim = new TelaFim();
         this.teste = 0;
     }
@@ -87,7 +85,7 @@ public class ControladorPrincipal {
     }
 
     public void irParaBoss() {
-        ctrlBatBoss.iniciaEncontro();
+        ControladorBatalhaBoss.getInstance().iniciaEncontro();
     }
     
     public void gameOver(){
