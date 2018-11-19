@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import br.ufsc.ine5605.controladores.ControladorBatalha;
 import br.ufsc.ine5605.entidades.Jogador;
+import javax.swing.ImageIcon;
 
 public class TelaBatalha extends TelaEncontro{
         
@@ -110,7 +111,6 @@ public class TelaBatalha extends TelaEncontro{
         container.add(lbNomeMonstro, c);
 
         lbNivelMonstro = new JLabel();
-        lbNivelMonstro.setText("NIVEL MONSTRO: ");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 2;
         c.gridy = 1;
@@ -129,8 +129,11 @@ public class TelaBatalha extends TelaEncontro{
         c.gridy = 3;
         container.add(lbVazia, c);
         /*----------IMAGENS----------*/
-        c.ipady = 400;
-        lbImgJogador = new JLabel("IMAGEM JOGADOR");
+        //ImageIcon imgFogueira = new ImageIcon("imagens\\fogueira.png");
+        
+        c.ipady = 200;
+        lbImgJogador = new JLabel();
+        lbImgJogador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/jogadoratacando.png")));
         c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 0;
         c.gridy = 4;
@@ -142,7 +145,8 @@ public class TelaBatalha extends TelaEncontro{
         c.gridy = 4;
         container.add(lbVazia, c);
         
-        lbImgAuxiliar = new JLabel("IMAGEM MONSTRO");
+        lbImgAuxiliar = new JLabel();
+        lbImgAuxiliar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufsc/ine5605/imagens/monstro.png")));
         c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 2;
         c.gridy = 4;
@@ -307,8 +311,7 @@ public class TelaBatalha extends TelaEncontro{
             
             lbNome.setText("NOME: " + dadosTelaCompactados.jogador.getNome());
             lbNivel.setText("NIVEL: " + Integer.toString(dadosTelaCompactados.jogador.getNivelInt()));
-            lbNomeMonstro.setText("NOME: " + dadosTelaCompactados.monstro.getNome());
-            lbNivelMonstro.setText("NIVEL: " + Integer.toString(dadosTelaCompactados.jogador.getNivelInt()));
+            lbNomeMonstro.setText(dadosTelaCompactados.monstro.getNome());
             
             lbNarra1.setText("...");
             lbNarra2.setText("...");

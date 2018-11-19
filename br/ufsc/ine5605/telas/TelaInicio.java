@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import br.ufsc.ine5605.controladores.ControladorGeral;
+import br.ufsc.ine5605.exception.NomeMuitoGrandeException;
+import br.ufsc.ine5605.exception.NomeVazioException;
 
 public class TelaInicio extends JFrame{
     
@@ -49,7 +51,7 @@ public class TelaInicio extends JFrame{
         c.gridy = 1;
         container.add(lb2, c);
         
-        tf = new JTextField();
+        tf = new JTextField("");
         c.fill = GridBagConstraints.HORIZONTAL;
         //c.weightx = 0.5;
         c.gridx = 0;
@@ -80,9 +82,22 @@ public class TelaInicio extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            ocultaTelaInicio();
-            
-            ControladorGeral.getInstance().play(tf.getText());
+            try{
+                if((tf.getText().length()>0) && (tf.getText().length()<=20)){
+                    ocultaTelaInicio();
+                    ControladorGeral.getInstance().play(tf.getText());
+                }else if(tf.getText().length()<=0){
+                    throw new NomeVazioException();
+                }else if(tf.getText().length()>20){
+                    throw new NomeMuitoGrandeException();
+                }
+            }catch(NomeVazioException ex){
+                TelaDeAviso tela = new TelaDeAviso(ex.getMessage());
+                tela.mostraTela();
+            }catch(NomeMuitoGrandeException ex){
+                TelaDeAviso tela = new TelaDeAviso(ex.getMessage());
+                tela.mostraTela();
+            }
         }
         
     }

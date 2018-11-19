@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import br.ufsc.ine5605.controladores.ControladorGeral;
 import br.ufsc.ine5605.entidades.Jogador;
+import br.ufsc.ine5605.exception.NadaSelecionadoException;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JScrollPane;
@@ -130,19 +131,30 @@ public class TelaSavedGame extends JFrame{
                 ControladorGeral.getInstance().inicio();
             }else if(e.getActionCommand().equals("CONTINUAR")){
                 setIndiceJogador();
-                if(getIndiceJogador()==-1){
-                    ocultaTela();
-                    ControladorGeral.getInstance().inicio();
-                }else{
-                    ocultaTela();
-                    ControladorGeral.getInstance().continuarComJogador(getIndiceJogador());
+                try{
+                    if(getIndiceJogador()!=-1){
+                        ocultaTela();
+                        ControladorGeral.getInstance().continuarComJogador(getIndiceJogador());
+                    }else{
+                        throw new NadaSelecionadoException();
+                    }
+                }catch(NadaSelecionadoException ex){
+                    TelaDeAviso tela = new TelaDeAviso(ex.getMessage());
+                    tela.mostraTela();
                 }
             }else if(e.getActionCommand().equals("EXCLUIR")){
-                    setIndiceJogador();
+                setIndiceJogador();
+                try{
                     if(getIndiceJogador() != -1){
                         ControladorGeral.getInstance().excluirJogador(getIndiceJogador());
-                        atualizaDados();
+                        ocultaTela();
+                    }else{
+                        throw new NadaSelecionadoException();
                     }
+                }catch(NadaSelecionadoException ex){
+                    TelaDeAviso tela = new TelaDeAviso(ex.getMessage());
+                    tela.mostraTela();
+                }
             }
             
         }
