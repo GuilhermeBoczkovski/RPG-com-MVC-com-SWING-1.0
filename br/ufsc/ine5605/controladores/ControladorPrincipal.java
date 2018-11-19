@@ -1,4 +1,5 @@
 package br.ufsc.ine5605.controladores;
+
 import br.ufsc.ine5605.telas.TelaFim;
 import java.util.Random;
 import br.ufsc.ine5605.controladores.ControladorBau;
@@ -23,6 +24,9 @@ public class ControladorPrincipal {
     }
     
     public static ControladorPrincipal getInstance(){
+        if(instancia == null){
+            instancia = new ControladorPrincipal("");
+        }
         return instancia;
     }
     
@@ -36,7 +40,6 @@ public class ControladorPrincipal {
 
     private ControladorPrincipal(String nome){
         mapJog = new MapeadorJogador();
-        jogador = mapJog.get(nome);
     }
     
     public Jogador getJogador() {
