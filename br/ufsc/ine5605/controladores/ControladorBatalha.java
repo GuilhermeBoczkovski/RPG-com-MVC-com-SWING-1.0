@@ -21,7 +21,6 @@ public class ControladorBatalha {
 
     private ControladorBatalha(){
         this.telaBatalha = new TelaBatalha();
-        
     }
     
     public static ControladorBatalha getInstance(){

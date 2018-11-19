@@ -10,28 +10,33 @@ import br.ufsc.ine5605.entidades.Monstro;
 import br.ufsc.ine5605.entidades.Ser;
 import br.ufsc.ine5605.entidades.TipoElemento;
 import br.ufsc.ine5605.entidades.Jogador;
+import br.ufsc.ine5605.telas.TelaInicioBatalhaBoss;
 
 public class ControladorBatalhaBoss {
-
-    private ControladorPrincipal controladorPrincipal;
+    
     private Monstro monstro;
     private TelaBatalhaBoss telaBatalha;
+    private static ControladorBatalhaBoss instancia;
 
-    public ControladorBatalhaBoss(ControladorPrincipal controladorPrincipal){
-        this.telaBatalha = new TelaBatalhaBoss(this);
-        this.controladorPrincipal = controladorPrincipal;
-        TipoElemento tipoElemento = TipoElemento.PEDRA;
-        this.monstro = new Monstro(10, tipoElemento);
+    private ControladorBatalhaBoss(){
+        this.telaBatalha = new TelaBatalhaBoss();
+        this.monstro = new Monstro(10, TipoElemento.PEDRA);
+    }
+    
+    public static ControladorBatalhaBoss getInstance(){
+        if(instancia == null){
+            instancia = new ControladorBatalhaBoss();
+        }
+        return instancia;
     }
     
     public void atacar(ConteudoTelaBatalha conteudoTela){
-
         ConteudoTelaBatalha conteudoTelaAtaqueJogador = new ConteudoTelaBatalha();
-        Feitico feitico = this.controladorPrincipal.getJogador().getFeitico(conteudoTelaAtaqueJogador.indiceFeitico);
+        Feitico feitico = ControladorPrincipal.getInstance().getJogador().getFeitico(conteudoTela.indiceFeitico);
 
         conteudoTelaAtaqueJogador.feitico = feitico;
         int danoDoJogador = feitico.getDano();
-        danoDoJogador += this.controladorPrincipal.getJogador().getArma().getDano();
+        danoDoJogador += ControladorPrincipal.getInstance().getJogador().getArma().getDano();
         TipoElemento elementoFeitico = feitico.getTipoElemento();
         TipoElemento elementoMonstro = this.monstro.getTipoElemento();
         if(!(elementoMonstro.equals(elementoFeitico))){
@@ -44,7 +49,7 @@ public class ControladorBatalhaBoss {
             }
         }
         conteudoTelaAtaqueJogador.danoAtaque = danoDoJogador;
-        conteudoTelaAtaqueJogador.atacante = this.controladorPrincipal.getJogador();
+        conteudoTelaAtaqueJogador.atacante = ControladorPrincipal.getInstance().getJogador();
         conteudoTelaAtaqueJogador.atacado = this.monstro;
         this.monstro.setVidaAtual(this.monstro.getVidaAtual()-danoDoJogador);
         if(this.monstro.getVidaAtual()<=0){
@@ -53,9 +58,10 @@ public class ControladorBatalhaBoss {
             ConteudoTelaBatalha conteudoTelaAtaqueMonstro = new ConteudoTelaBatalha();
             int danoDoMonstro = this.monstro.getForca();
             conteudoTelaAtaqueMonstro.danoAtaque = danoDoMonstro;
-            conteudoTelaAtaqueMonstro.atacado = this.controladorPrincipal.getJogador();
+            conteudoTelaAtaqueMonstro.atacado = ControladorPrincipal.getInstance().getJogador();
             conteudoTelaAtaqueMonstro.atacante = this.monstro;
-            this.controladorPrincipal.getJogador().setVidaAtual(this.controladorPrincipal.getJogador().getVidaAtual()-danoDoMonstro);
+            ControladorPrincipal.getInstance().getJogador().setVidaAtual(ControladorPrincipal.getInstance().getJogador().getVidaAtual()-danoDoMonstro);
+            this.atualizaDadosTela();
             this.telaBatalha.mostraAtaque(conteudoTelaAtaqueJogador, conteudoTelaAtaqueMonstro);
         }
     }
@@ -67,17 +73,6 @@ public class ControladorBatalhaBoss {
     public void analisarMonstro() {
         ConteudoTelaBatalha conteudoTela = compactar(this.monstro);
         this.telaBatalha.mostraAnalise(conteudoTela);
-    }
-
-    public void verItens(){
-        Arma arma = this.controladorPrincipal.getJogador().getArma();
-        ArrayList<Consumivel> consumiveis = this.controladorPrincipal.getJogador().getConsumiveisBolsa();
-        ArrayList<ConteudoTelaBatalha> conteudoTelaS = new ArrayList();
-        for(int i = 0; i < consumiveis.size(); i++){
-            conteudoTelaS.add(compactar(consumiveis.get(i)));
-        }
-        ConteudoTelaBatalha conteudoTela = compactar(arma);
-        this.telaBatalha.mostraItens(conteudoTelaS, conteudoTela);
     }
 
     public void verFeiticos(ConteudoTelaBatalha conteudoTela){
@@ -99,12 +94,11 @@ public class ControladorBatalhaBoss {
                 default :
                     tipoElemento = TipoElemento.PEDRA;
             }
-            ArrayList<Feitico> feiticos = this.controladorPrincipal.getJogador().verFeiticos(tipoElemento);
+            ArrayList<Feitico> feiticos = ControladorPrincipal.getInstance().getJogador().verFeiticos(tipoElemento);
             ArrayList<ConteudoTelaBatalha> conteudoTelaS = this.compactar(feiticos);
             telaBatalha.mostraFeiticos(conteudoTelaS);
         }catch(Exception e){
-            this.telaBatalha.mostraExcecao(e.getMessage());
-            telaBatalha.mostraMenuBatalha();
+            telaBatalha.mostraTela();
         }
     }
 
@@ -112,7 +106,7 @@ public class ControladorBatalhaBoss {
         try{
             switch(opcao){
                 case "1" :
-                    this.telaBatalha.mostraMenuAtaque(compactar(this.controladorPrincipal.getJogador().getFeiticos()));
+                    this.telaBatalha.mostraMenuAtaque(compactar(ControladorPrincipal.getInstance().getJogador().getFeiticos()));
                     break;
                 case "2" :
                     this.analisarMonstro();
@@ -121,10 +115,9 @@ public class ControladorBatalhaBoss {
                     this.telaBatalha.mostraMenuFeitico();
                     break;
                 case "4" :
-                    this.verItens();
                     break;
                 case "5" :
-                    this.telaBatalha.mostraMenuItens(compactar(this.controladorPrincipal.getJogador().getConsumiveisBolsa(),1));
+                    this.telaBatalha.mostraMenuItens(compactar(ControladorPrincipal.getInstance().getJogador().getConsumiveisBolsa(),1));
                     break;
                 case "6" :
                     this.verMeusAtributos();
@@ -132,13 +125,18 @@ public class ControladorBatalhaBoss {
                 default:
             }
         }catch(Exception e){
-            this.telaBatalha.mostraExcecao(e.getMessage());
-            this.telaBatalha.mostraMenuBatalha();
+            this.telaBatalha.mostraTela();
         }
     }
     
     public void iniciaEncontro() {
-        this.telaBatalha.mostraInicioBatalha();
+        TelaInicioBatalhaBoss tela = new TelaInicioBatalhaBoss();
+        this.atualizaDadosTela();
+        tela.mostraTela();
+    }
+    
+    public void irParaTelaBatalha(){
+        this.telaBatalha.mostraTela();
     }
 
     public ConteudoTelaBatalha compactar(Ser atacado, Ser atacante, int danoAtaque) {
@@ -168,26 +166,26 @@ public class ControladorBatalhaBoss {
     
     public void usarItem(int indice){
         try{
-            if(indice < this.controladorPrincipal.getJogador().getConsumiveisBolsa().size()){
-                this.controladorPrincipal.getJogador().usarItem(indice);
-                this.telaBatalha.mostraMenuBatalha();
+            if(indice < ControladorPrincipal.getInstance().getJogador().getConsumiveisBolsa().size()){
+                ControladorPrincipal.getInstance().getJogador().usarItem(indice);
+                this.atualizaDadosTela();
+                this.telaBatalha.mostraTela();
             }else{
             }
         }catch(Exception e){
-            this.telaBatalha.mostraExcecao(e.getMessage());
-            this.telaBatalha.mostraMenuBatalha();
+            this.telaBatalha.mostraTela();
         }
     }
     
     public void verMeusAtributos(){
-        Jogador jogador = this.controladorPrincipal.getJogador();
+        Jogador jogador = ControladorPrincipal.getInstance().getJogador();
         ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
         conteudoTela.jogador = jogador;
         this.telaBatalha.mostraMeusAtributos(jogador);
     }
 
     public void gameOver() {
-        this.controladorPrincipal.gameOver();
+        ControladorPrincipal.getInstance().gameOver();
     }
     
     private ArrayList<ConteudoTelaBatalha> compactar(ArrayList<Feitico> feiticos) {
@@ -213,7 +211,7 @@ public class ControladorBatalhaBoss {
     public boolean indiceFeiticoValido(String indiceFeiticoString) {
         boolean indiceValido = false;
         Integer cont = 0;
-        for(Feitico feitico : this.controladorPrincipal.getJogador().getFeiticos()){
+        for(Feitico feitico : ControladorPrincipal.getInstance().getJogador().getFeiticos()){
             String contString = Integer.toString(cont);
             if(indiceFeiticoString.equals(contString)){
                 indiceValido = true;
@@ -223,13 +221,22 @@ public class ControladorBatalhaBoss {
         }
         if(indiceValido){
             int indiceFeiticoInt = Integer.parseInt(indiceFeiticoString);
-            if(indiceFeiticoInt >= 0 && indiceFeiticoInt < this.controladorPrincipal.getJogador().getFeiticos().size()){
+            if(indiceFeiticoInt >= 0 && indiceFeiticoInt < ControladorPrincipal.getInstance().getJogador().getFeiticos().size()){
                 return true;
             }else{
                 return false;
             }
         }else{
             return false;
+        }
+    }
+    
+    public void atualizaDadosTela(){
+        if(ControladorPrincipal.getInstance().getJogador() != null){
+            ConteudoTelaBatalha dadosTelaCompactados = new ConteudoTelaBatalha();
+            dadosTelaCompactados.jogador = ControladorPrincipal.getInstance().getJogador();
+            dadosTelaCompactados.monstro = this.monstro;
+            this.telaBatalha.atualizaDados(dadosTelaCompactados);
         }
     }
     
