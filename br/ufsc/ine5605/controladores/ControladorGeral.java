@@ -14,7 +14,7 @@ public class ControladorGeral {
     private static ControladorGeral instancia;
     
     private ControladorGeral(){
-        this.telaMenuInicial = new TelaMenuInicial(this);
+        this.telaMenuInicial = new TelaMenuInicial();
         this.menuInicial();
     }
     
@@ -25,8 +25,17 @@ public class ControladorGeral {
         return instancia;
     }
     
+    public void continuarComJogador(int indiceJogador){
+        ControladorPrincipal.getInstance().continuarComJogador(indiceJogador);
+    }
+    
+    public void excluirJogador(int indiceJogador){
+        ControladorPrincipal.getInstance().excluiJogador(indiceJogador);
+    }
+    
     public void continuar(){
-        
+        this.telaSavedGame = new TelaSavedGame(ControladorPrincipal.getInstance().getListaJogadoresSalvos());
+        this.telaSavedGame.mostraTela();
     }
     
     public void menuInicial(){

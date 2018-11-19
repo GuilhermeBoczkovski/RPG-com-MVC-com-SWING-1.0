@@ -4,6 +4,7 @@ import java.util.Random;
 import br.ufsc.ine5605.controladores.ControladorBau;
 import br.ufsc.ine5605.entidades.Jogador;
 import br.ufsc.ine5605.mapeadores.MapeadorJogador;
+import java.util.ArrayList;
 
 public class ControladorPrincipal {
     
@@ -43,7 +44,27 @@ public class ControladorPrincipal {
     }
     
     public void salvar(){
+        this.mapJog.load();
+        this.mapJog.put(jogador);
         this.mapJog.persist();
+    }
+    
+    public ArrayList<Jogador> getListaJogadoresSalvos(){
+        this.mapJog.load();
+        return this.mapJog.getList();
+    }
+    
+    public void excluiJogador(int indiceJogador){
+        this.mapJog.load();
+        this.mapJog.exclude(indiceJogador);
+        this.mapJog.persist();
+    }
+    
+    public void continuarComJogador(int indiceJogador){
+        this.mapJog.load();
+        this.jogador = this.mapJog.get(indiceJogador);
+        this.teste = 2;
+        this.escolheEncontro();
     }
 
     public void escolheEncontro(){
