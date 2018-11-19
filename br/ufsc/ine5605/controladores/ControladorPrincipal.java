@@ -33,7 +33,6 @@ public class ControladorPrincipal {
     private ControladorPrincipal(String nome, int i){
         criaJogador(nome, 10);
         mapJog = new MapeadorJogador();
-        mapJog.put(this.jogador);
         telaFim = new TelaFim();
         this.teste = 0;
     }

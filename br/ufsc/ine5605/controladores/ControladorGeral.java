@@ -31,6 +31,8 @@ public class ControladorGeral {
     
     public void excluirJogador(int indiceJogador){
         ControladorPrincipal.getInstance().excluiJogador(indiceJogador);
+        this.telaSavedGame = new TelaSavedGame(ControladorPrincipal.getInstance().getListaJogadoresSalvos());
+        this.telaSavedGame.mostraTela();
     }
     
     public void continuar(){
